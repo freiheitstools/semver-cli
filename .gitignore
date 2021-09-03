@@ -1,0 +1,13 @@
+/.idea
+*.iml
+*.ipr
+*~
+*.log
+.DS_Store
+release.properties
+pom.xml.releaseBackup
+.java-version
+*.backup
+*.sh.ignore
+target
+/.mvn
