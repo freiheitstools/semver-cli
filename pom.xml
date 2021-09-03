@@ -42,10 +42,10 @@
         <version>3.8.1</version>
         <configuration>
           <encoding>UTF-8</encoding>
-          <source>1.8</source>
-          <target>1.8</target>
-          <testSource>1.8</testSource>
-          <testTarget>1.8</testTarget>
+          <source>11</source>
+          <target>11</target>
+          <testSource>11</testSource>
+          <testTarget>11</testTarget>
           <annotationProcessorPaths>
             <path>
               <groupId>info.picocli</groupId>
@@ -56,6 +56,22 @@
           <compilerArgs>
             <arg>-Aproject=${project.groupId}/${project.artifactId}</arg>
           </compilerArgs>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.graalvm.nativeimage</groupId>
+        <artifactId>native-image-maven-plugin</artifactId>
+        <version>21.2.0</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>native-image</goal>
+            </goals>
+            <phase>package</phase>
+          </execution>
+        </executions>
+        <configuration>
+          <imageName>semver.${os.arch}.bin</imageName>
         </configuration>
       </plugin>
       <plugin>
