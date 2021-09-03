@@ -1,0 +1,96 @@
+name: XXX Build
+
+on:
+  workflow_dispatch:
+  push:
+
+
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest, ubuntu-latest]
+        jdk: [ 17 ]
+
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout Git Repository
+        id: git-checkout
+        uses: actions/checkout@v2
+        
+      - name: Setup GraalVM Community Edition
+        id: setup-graalvm
+        uses: graalvm/setup-graalvm@v1
+        with:
+          version: 'latest'
+          java-version: '17'
+          components: 'native-image'
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Show Versions of used tools
+        run: |
+          echo "GRAALVM_HOME: $GRAALVM_HOME"
+          echo "JAVA_HOME: $JAVA_HOME"
+          echo "Version of java:" $(java --version)
+          echo "Version of gu:" $(gu --version)
+          echo "Version of native-image:" $(native-image --version)
+          echo "Version of Apache Maven:" $(mvn --version)
+
+      - name: Determine build meta data
+        id: determine_meta_data
+        run: |
+          PROJECT_VERSION=$(mvn -q -DforceStdout help:evaluate -Dexpression=project.version)
+          echo "project_version=${PROJECT_VERSION}" >> ${GITHUB_OUTPUT}
+          
+          PROJECT_ARCH=$(mvn -q -DforceStdout help:evaluate -Dexpression=os.arch)
+          echo "project_arch=${PROJECT_ARCH}" >> ${GITHUB_OUTPUT}
+          
+          PROJECT_FAMILY=$(mvn -q -DforceStdout help:evaluate -Dexpression=os.family)
+          echo "project_family=${PROJECT_FAMILY}" >> ${GITHUB_OUTPUT}
+
+      - name: Display extracted Maven build meta data
+        run: |
+          echo "Project version: " ${{ steps.determine_meta_data.outputs.project_version }}
+          echo "Maven build architecture: " ${{ steps.determine_meta_data.outputs.project_arch }}
+          echo "Maven OS family: " ${{ steps.determine_meta_data.outputs.project_family }}
+
+      - name: Setup local cached Maven Repository
+        id: setup-cached-repo
+        uses: actions/cache@v2
+        env:
+          cache-name: maven-local-repository-cache
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/pom.xml') }}
+
+      - name: Build
+        id: maven-build
+        run: |
+          mvn --no-transfer-progress --batch-mode clean install
+
+      - name: Display Build Results
+        id: show-result
+        run: |
+          ls -lha client/pure/target/
+            
+          UEBERJAR_FILENAME=$( basename $( ls client/pure/target/semver*.jar ))
+          echo "ueberjar_filename=${UEBERJAR_FILENAME}" >> ${GITHUB_OUTPUT}
+
+          NATIVE_FILENAME=$( basename $( ls client/pure/target/semver*.bin ))
+          echo "native_filename=${NATIVE_FILENAME}" >> ${GITHUB_OUTPUT}
+
+      - name: Upload native binary
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ steps.show-result.outputs.native_filename }}
+          path: client/pure/target/${{ steps.show-result.outputs.native_filename }}
+          if-no-files-found: error
+
+      - name: Upload ueberjar
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ steps.show-result.outputs.ueberjar_filename }}
+          path: client/pure/target/${{ steps.show-result.outputs.ueberjar_filename }}
+          if-no-files-found: error

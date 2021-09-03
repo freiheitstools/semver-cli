@@ -1,0 +1,48 @@
+= SemVer Commandline Client
+
+
+[abstract]
+_semver_ is a commandline client to process and manipulate semantic version numbers according to the https://semver.org/[semantic versioning specification 2.0.0^] on the command line.
+
+== Examples
+
+.Getting the next major version for a given version number
+----
+$ semver nextmajor 193.94.2
+194.0.0
+----
+
+.Getting the version number for a release candidate
+----
+$ semver nextpatch --suffix=RC-1 4.5.6-SNAPSHOT
+4.5.7-RC-1
+----
+
+== Benefits
+
+_semver_ is intended to be used in any kind of automated workflows dealing with version information, e.g. in CI/CD pipelines.
+Therefore, _semver_ is a good alternative to scripting and regular expressions.
+
+== Supported Platforms
+
+_semver_ is written in Java and provided as native binaries for MacOS and Linux.
+Beside the native binaries, it is also provided as standard jar.
+
+== Requirements
+
+The jar distribution of _semver_ requires Java 11.
+
+== Usage
+
+----
+$ semver.macos.x86_64.bin --help
+Usage: semver [-hV] [COMMAND]
+  -h, --help      Show this help message and exit.
+  -V, --version   Print version information and exit.
+Commands:
+  nextmajor  Return the next major version for a given version
+  nextminor  Return the next minor version for a given version
+  nextpatch  Return the next patch version for a given version
+  strip      Returns the version without suffix and build number
+  validate   Validates a given version
+----
