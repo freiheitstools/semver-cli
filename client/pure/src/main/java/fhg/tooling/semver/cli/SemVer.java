@@ -10,7 +10,7 @@ import picocli.CommandLine;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Enumeration;
-import java.util.concurrent.Callable;
+
 import java.util.jar.Attributes;
 import java.util.jar.Manifest;
 
@@ -21,14 +21,9 @@ import java.util.jar.Manifest;
                 NextPatchSubcommand.class, ValidateSubcommand.class},
         versionProvider = SemVer.ManifestVersionProvider.class
 )
-public class SemVer 
+public class SemVer
 {
-    /*
 
-    @CommandLine.Option(names = "--ver", versionHelp = true,
-            description = "Print version info and exit")
-    boolean versionRequested;
-*/
 
     public static void main(String[] args) {
         SemVer command = new SemVer();
@@ -37,6 +32,7 @@ public class SemVer
 
     static class ManifestVersionProvider implements CommandLine.IVersionProvider {
         public String[] getVersion() throws Exception {
+
             Enumeration<URL> resources = CommandLine.class.getClassLoader().getResources("META-INF/MANIFEST.MF");
             while (resources.hasMoreElements()) {
                 URL url = resources.nextElement();
@@ -44,8 +40,8 @@ public class SemVer
                     Manifest manifest = new Manifest(url.openStream());
                     if (isApplicableManifest(manifest)) {
                         Attributes attr = manifest.getMainAttributes();
-                        return new String[] { get(attr, "cliname") + " version \"" +
-                                get(attr, "Implementation-Version") + "\"" };
+                        return new String[] { get(attr, "cliname") + " version " +
+                                get(attr, "Implementation-Version") };
                     }
                 } catch (IOException ex) {
                     return new String[] { "Unable to read from " + url + ": " + ex };
