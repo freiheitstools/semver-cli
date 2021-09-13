@@ -20,6 +20,6 @@ public class NextPatchSubcommand extends BumpingSubcommand
 
     @Override
     Function<Semver, Semver> getBumpingFunction() {
-        return Semver::nextMinor;
+        return Semver::nextPatch;
     }
 }
