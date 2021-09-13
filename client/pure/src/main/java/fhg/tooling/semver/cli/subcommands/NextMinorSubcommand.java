@@ -6,26 +6,18 @@ import fhg.tooling.semver.cli.ExitCodes;
 import picocli.CommandLine.Command;
 
 import java.util.concurrent.Callable;
+import java.util.function.Function;
+import java.util.stream.Stream;
 
 import static picocli.CommandLine.*;
 
 @Command(name = "nextminor",
          description = "Return the next minor version for a given version")
-public class NextMinorSubcommand implements Callable<Integer> {
-    @Parameters(index = "0")
-    private String version;
+public class NextMinorSubcommand extends BumpingSubcommand
+        implements Callable<Integer> {
 
-    public Integer call() {
-        try {
-            Semver semver = new Semver(version);
-            Semver nextSemver = semver.nextMinor();
-
-            System.out.println(nextSemver);
-        } catch (SemverException e) {
-            System.err.println(e.getMessage());
-            return ExitCodes.INVALID_VERSION_IDENTIFIER;
-        }
-
-        return ExitCodes.SUCCESS;
+    @Override
+    Function<Semver, Semver> getBumpingFunction() {
+        return Semver::nextMinor;
     }
 }
