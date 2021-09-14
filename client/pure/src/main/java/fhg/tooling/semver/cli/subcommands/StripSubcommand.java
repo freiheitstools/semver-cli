@@ -3,25 +3,29 @@ package fhg.tooling.semver.cli.subcommands;
 import com.vdurmont.semver4j.Semver;
 import com.vdurmont.semver4j.SemverException;
 import fhg.tooling.semver.cli.ExitCodes;
-import picocli.CommandLine;
 import picocli.CommandLine.Command;
-import picocli.CommandLine.Parameters;
+import picocli.CommandLine.Mixin;
 
 import java.util.concurrent.Callable;
-import java.util.function.Function;
 
 @Command(name = "strip",
          description = "Returns the version without suffix and build number")
 public class StripSubcommand implements Callable<Integer> {
-    @Parameters(index = "0")
-    private String version;
+    @Mixin
+    private VersionParameter versionParameter = new VersionParameter();
+
+    @Mixin
+    private OutputOptions outputOptions = new OutputOptions();
+
+    private VersionPrinter printer = new VersionPrinter();
 
     @Override
     public Integer call() throws Exception {
         try {
-            Semver semver = new Semver(version);
+            Semver semver = new Semver(versionParameter.version);
             Semver stripped = semver.withClearedSuffixAndBuild();
-            System.out.println(stripped);
+            printer.printVersion(outputOptions.noNewLine, stripped, System.out);
+
         } catch (SemverException e) {
             System.err.println(e.getMessage());
             return ExitCodes.INVALID_VERSION_IDENTIFIER;
