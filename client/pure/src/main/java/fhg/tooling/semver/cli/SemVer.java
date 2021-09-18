@@ -1,6 +1,5 @@
 package fhg.tooling.semver.cli;
 
-
 import fhg.tooling.semver.cli.subcommands.NextMajorSubcommand;
 import fhg.tooling.semver.cli.subcommands.NextMinorSubcommand;
 import fhg.tooling.semver.cli.subcommands.NextPatchSubcommand;
@@ -21,12 +20,9 @@ import java.util.jar.Manifest;
                 NextMajorSubcommand.class, NextMinorSubcommand.class,
                 NextPatchSubcommand.class, StripSubcommand.class,
                 ValidateSubcommand.class},
-        versionProvider = SemVer.ManifestVersionProvider.class
-)
+        versionProvider = SemVer.ManifestVersionProvider.class)
 public class SemVer
 {
-
-
     public static void main(String[] args) {
         SemVer command = new SemVer();
         System.exit(new CommandLine(command).execute(args));
@@ -42,8 +38,9 @@ public class SemVer
                     Manifest manifest = new Manifest(url.openStream());
                     if (isApplicableManifest(manifest)) {
                         Attributes attr = manifest.getMainAttributes();
-                        return new String[] { get(attr, "cliname") + " version " +
-                                get(attr, "Implementation-Version") };
+                        return new String[]{get(attr, "cliname") + " version " + get(attr, "Implementation-Version"),
+                                            "License: Apache License 2.0",
+                                            "Homepage: https://github.com/freiheitstools/semver-cli"};
                     }
                 } catch (IOException ex) {
                     return new String[] { "Unable to read from " + url + ": " + ex };

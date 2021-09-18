@@ -1,6 +1,5 @@
 package fhg.tooling.semver.cli.subcommands;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import picocli.CommandLine;
@@ -10,14 +9,13 @@ import java.io.PrintStream;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
-class NextMajorSubcommandTest {
+class NextMinorSubcommandTest {
     @Nested
     class CommandlineArguments {
         @Test
         void callWithVersionString() {
-            NextMajorSubcommand command = new NextMajorSubcommand();
+            NextMinorSubcommand command = new NextMinorSubcommand();
             CommandLine cmdline = new CommandLine(command);
 
             CommandLine.ParseResult parseResult = cmdline.parseArgs("4.5.6");
@@ -29,7 +27,7 @@ class NextMajorSubcommandTest {
 
         @Test
         void callWithOptionForSuffix() {
-            NextMajorSubcommand command = new NextMajorSubcommand();
+            NextMinorSubcommand command = new NextMinorSubcommand();
             CommandLine cmdline = new CommandLine(command);
 
             CommandLine.ParseResult parseResult = cmdline.parseArgs("--suffix", "DELTA", "4.5.6");
@@ -45,22 +43,22 @@ class NextMajorSubcommandTest {
     @Nested
     class Functional {
         @Test
-        void bumpToNextMajorVersionWorks() {
+        void bumpToNextMinorVersionWorks() {
             PrintStream stdoutStream = System.out;
             ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
             System.setOut(new PrintStream(outputStreamCaptor));
             int exitCode = -1;
 
             try {
-                NextMajorSubcommand command = new NextMajorSubcommand();
+                NextMinorSubcommand command = new NextMinorSubcommand();
                 CommandLine cmdline = new CommandLine(command);
 
-                exitCode = cmdline.execute("-n", "4.5.6");
+                exitCode = cmdline.execute("-n", "4.6.0");
             } finally {
                 System.setOut(stdoutStream);
             }
 
-            assertThat(outputStreamCaptor.toString()).isEqualTo("5.0.0");
+            assertThat(outputStreamCaptor.toString()).isEqualTo("4.7.0");
             assertThat(exitCode).isEqualTo(0);
         }
 
@@ -72,7 +70,7 @@ class NextMajorSubcommandTest {
             int exitCode = -1;
 
             try {
-                NextMajorSubcommand command = new NextMajorSubcommand();
+                NextMinorSubcommand command = new NextMinorSubcommand();
                 CommandLine cmdline = new CommandLine(command);
 
                 exitCode = cmdline.execute("-s=SNAPSHOT", "-n", "4.5.6");
@@ -80,7 +78,7 @@ class NextMajorSubcommandTest {
                 System.setOut(stdoutStream);
             }
 
-            assertThat(outputStreamCaptor.toString()).isEqualTo("5.0.0-SNAPSHOT");
+            assertThat(outputStreamCaptor.toString()).isEqualTo("4.6.0-SNAPSHOT");
             assertThat(exitCode).isEqualTo(0);
         }
 
@@ -92,7 +90,7 @@ class NextMajorSubcommandTest {
             int exitCode = -1;
 
             try {
-                NextMajorSubcommand command = new NextMajorSubcommand();
+                NextMinorSubcommand command = new NextMinorSubcommand();
                 CommandLine cmdline = new CommandLine(command);
 
                 exitCode = cmdline.execute("-b=23", "-s=SNAPSHOT", "-n", "4.5.6");
@@ -100,7 +98,7 @@ class NextMajorSubcommandTest {
                 System.setOut(stdoutStream);
             }
 
-            assertThat(outputStreamCaptor.toString()).isEqualTo("5.0.0-SNAPSHOT+23");
+            assertThat(outputStreamCaptor.toString()).isEqualTo("4.6.0-SNAPSHOT+23");
             assertThat(exitCode).isEqualTo(0);
         }
     }
@@ -114,7 +112,7 @@ class NextMajorSubcommandTest {
             System.setOut(new PrintStream(outputStreamCaptor));
 
             try {
-                NextMajorSubcommand command = new NextMajorSubcommand();
+                NextMinorSubcommand command = new NextMinorSubcommand();
                 CommandLine cmdline = new CommandLine(command);
 
                 cmdline.execute("4.5.6");
@@ -122,7 +120,7 @@ class NextMajorSubcommandTest {
                 System.setOut(stdoutStream);
             }
 
-            assertThat(outputStreamCaptor.toString()).isEqualTo("5.0.0\n");
+            assertThat(outputStreamCaptor.toString()).isEqualTo("4.6.0\n");
         }
 
         @Test
@@ -132,7 +130,7 @@ class NextMajorSubcommandTest {
             System.setOut(new PrintStream(outputStreamCaptor));
 
             try {
-                NextMajorSubcommand command = new NextMajorSubcommand();
+                NextMinorSubcommand command = new NextMinorSubcommand();
                 CommandLine cmdline = new CommandLine(command);
 
                 cmdline.execute("-n", "4.5.6");
@@ -140,7 +138,7 @@ class NextMajorSubcommandTest {
                 System.setOut(stdoutStream);
             }
 
-            assertThat(outputStreamCaptor.toString()).isEqualTo("5.0.0");
+            assertThat(outputStreamCaptor.toString()).isEqualTo("4.6.0");
         }
     }
 
