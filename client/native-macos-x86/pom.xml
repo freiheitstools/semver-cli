@@ -28,8 +28,8 @@
             <id>native</id>
             <activation>
                 <os>
-                    <family>mac</family>
                     <arch>x86_64</arch>
+                    <family>mac</family>
                     <name>mac os x</name>
                 </os>
             </activation>
@@ -44,10 +44,15 @@
                         <groupId>org.graalvm.nativeimage</groupId>
                         <artifactId>native-image-maven-plugin</artifactId>
                     </plugin>
+
+
                 </plugins>
+
             </build>
 
         </profile>
+
+
 
     </profiles>
 </project>

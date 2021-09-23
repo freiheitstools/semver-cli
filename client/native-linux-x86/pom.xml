@@ -21,8 +21,9 @@
             <id>native</id>
             <activation>
                 <os>
+                    <arch>amd64</arch>
+                    <family>unix</family>
                     <name>linux</name>
-                    <arch>x86_64</arch>
                 </os>
 
             </activation>
