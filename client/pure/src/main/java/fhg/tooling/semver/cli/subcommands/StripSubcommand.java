@@ -22,7 +22,7 @@ public class StripSubcommand implements Callable<Integer> {
     @Override
     public Integer call() throws Exception {
         try {
-            Semver semver = new Semver(versionParameter.version);
+            Semver semver = new Semver(versionParameter.getVersion());
             Semver stripped = semver.withClearedSuffixAndBuild();
             printer.printVersion(outputOptions.noNewLine, stripped, System.out);
 

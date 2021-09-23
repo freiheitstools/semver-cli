@@ -25,11 +25,12 @@
 
     <profiles>
         <profile>
-            <id>native-macos</id>
+            <id>native</id>
             <activation>
                 <os>
                     <family>mac</family>
                     <arch>x86_64</arch>
+                    <name>mac os x</name>
                 </os>
             </activation>
 

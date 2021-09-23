@@ -1,16 +1,13 @@
 package fhg.tooling.semver.cli.subcommands;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import picocli.CommandLine;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class NextMajorSubcommandTest {
     @Nested
@@ -37,8 +34,8 @@ class NextMajorSubcommandTest {
             assertThat(parseResult.hasMatchedPositional(0)).isTrue();
             assertThat(parseResult.matchedPositional(0).<String>getValue()).isEqualTo("4.5.6");
             assertThat(parseResult.matchedOptions()).hasSize(1);
-            assertThat(parseResult.matchedOption("--suffix").isOption());
-            assertThat(parseResult.matchedOption("--suffix").<Optional<String>>getValue()).hasValue("DELTA");
+            assertThat(parseResult.matchedOption("--suffix").isOption()).isTrue();
+            assertThat(parseResult.matchedOption("--suffix").<String>getValue()).isEqualTo("DELTA");
         }
     }
 

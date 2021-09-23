@@ -25,11 +25,11 @@ abstract class BumpingSubcommand {
 
     public Integer call() {
         try {
-            Semver result = Stream.of(versionParameter.version)
-                    .map(s -> new Semver(versionParameter.version))
+            Semver result = Stream.of(versionParameter.getVersion())
+                    .map(s -> new Semver(versionParameter.getVersion()))
                     .map(getBumpingFunction())
-                    .map(semver -> suffixOptions.suffix.map(semver::withSuffix).orElse(semver))
-                    .map(semver -> suffixOptions.buildNumber.map(semver::withBuild).orElse(semver))
+                    .map(semver -> suffixOptions.getSuffix().map(semver::withSuffix).orElse(semver))
+                    .map(semver -> suffixOptions.getBuildNumber().map(semver::withBuild).orElse(semver))
                     .findFirst().get();
 
             printer.printVersion(outputOptions.noNewLine, result, System.out);

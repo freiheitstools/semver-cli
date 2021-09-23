@@ -18,7 +18,7 @@ public class ValidateSubcommand implements Callable<Integer> {
 
     public Integer call() throws Exception {
         try {
-            Semver semver = new Semver(versionParameter.version);
+            Semver semver = new Semver(versionParameter.getVersion());
         } catch (SemverException e) {
             System.err.println(e.getMessage());
             return ExitCodes.INVALID_VERSION_IDENTIFIER;

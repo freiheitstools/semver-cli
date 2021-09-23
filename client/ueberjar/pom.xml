@@ -30,13 +30,11 @@
         <configuration>
           <archive>
             <manifest>
-
               <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
             </manifest>
             <manifestEntries>
               <cliname>semver</cliname>
             </manifestEntries>
-
           </archive>
         </configuration>
       </plugin>

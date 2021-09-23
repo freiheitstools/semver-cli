@@ -35,8 +35,8 @@ class NextPatchSubcommandTest {
             assertThat(parseResult.hasMatchedPositional(0)).isTrue();
             assertThat(parseResult.matchedPositional(0).<String>getValue()).isEqualTo("4.5.6");
             assertThat(parseResult.matchedOptions()).hasSize(1);
-            assertThat(parseResult.matchedOption("--suffix").isOption());
-            assertThat(parseResult.matchedOption("--suffix").<Optional<String>>getValue()).hasValue("DELTA");
+            assertThat(parseResult.matchedOption("--suffix").isOption()).isTrue();
+            assertThat(parseResult.matchedOption("--suffix").<String>getValue()).isEqualTo("DELTA");
         }
     }
 

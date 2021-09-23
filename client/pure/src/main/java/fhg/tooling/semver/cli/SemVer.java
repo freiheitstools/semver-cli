@@ -16,6 +16,7 @@ import java.util.jar.Manifest;
 
 @CommandLine.Command(
         mixinStandardHelpOptions = true,
+        name = "semver",
         subcommands = {
                 NextMajorSubcommand.class, NextMinorSubcommand.class,
                 NextPatchSubcommand.class, StripSubcommand.class,

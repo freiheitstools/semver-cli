@@ -8,6 +8,6 @@ release.properties
 pom.xml.releaseBackup
 .java-version
 *.backup
-*.sh.ignore
+*.ignore.sh
 target
 /.mvn
