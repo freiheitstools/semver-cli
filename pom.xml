@@ -4,7 +4,7 @@
   <groupId>io.github.freiheitstools.semver.cli</groupId>
   <artifactId>semver</artifactId>
   <packaging>pom</packaging>
-  <version>1.0-SNAPSHOT</version>
+  <version>0.1.0-SNAPSHOT</version>
   <name>Semantic Versioning Commandline Client</name>
   <url>https://github.com/freiheitstools/semver-cli</url>
 
@@ -68,6 +68,7 @@
           <configuration>
             <imageName>semver.${osname}.${os.arch}.bin</imageName>
             <mainClass>fhg.tooling.semver.cli.SemVer</mainClass>
+            <buildArgs>--verbose</buildArgs>
           </configuration>
         </plugin>
 
