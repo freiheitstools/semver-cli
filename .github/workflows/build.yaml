@@ -54,6 +54,6 @@ jobs:
         distribution: [ zulu, adopt-hotspot, adopt-openj9 ]
     runs-on: ${{ matrix.os }}
     steps:
-      - name: test
-        shell: bash
-        run: echo Hi
+      - name: Checkout Git Repository
+        id: git-checkout
+        uses: actions/checkout@v2
