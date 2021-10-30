@@ -2,8 +2,11 @@
 
 
 [abstract]
-dddd
+_semver_ is a commandline client to process and manipulate semantic version numbers according to the https://semver.org/[semantic versioning specification 2.0.0^] on the command line.
 
+
+
+https://xxx[]
 
 :toc:
 :icons: font
