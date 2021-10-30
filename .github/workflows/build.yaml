@@ -10,7 +10,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ ubuntu-latest, macos-latest ]
-        jdk: [ 11, 14 ]
+        jdk: [ 11, 14, 17 ]
         distribution: [ zulu, adopt-hotspot, adopt-openj9 ]
 
     runs-on: ${{ matrix.os }}
