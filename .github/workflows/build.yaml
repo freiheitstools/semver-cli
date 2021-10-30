@@ -40,3 +40,8 @@ jobs:
           mvn -B -P -native \
               --no-transfer-progress \
               clean install
+  YYYY:
+    steps:
+      - name: test
+        shell: bash
+        run: echo Hi
