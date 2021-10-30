@@ -18,6 +18,11 @@ $ semver nextpatch --suffix=RC-1 4.5.6-SNAPSHOT
 4.5.7-RC-1
 ----
 
+== Benefits
+
+_semver_ is intended to be used in any kind of automated workflows dealing with version information, e.g. in CI/CD pipelines.
+
+
 
 
 https://xxx[]
