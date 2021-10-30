@@ -15,3 +15,8 @@ jobs:
     steps:
       - name: Checkout Git Repository
         uses: actions/checkout@v2
+
+      - name: Setup JDK
+        uses: actions/setup-java@v2
+        with:
+          java-version: ${{ matrix.jdk }}
