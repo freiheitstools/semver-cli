@@ -94,7 +94,7 @@ jobs:
         shell: bash
         run: |
           set -e
-          mvn -B -P native \
+          mvn -B -P native-build \
               --no-transfer-progress \
               clean install
 
