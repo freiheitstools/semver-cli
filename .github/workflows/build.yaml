@@ -41,6 +41,13 @@ jobs:
               --no-transfer-progress \
               clean install
   YYYY:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ ubuntu-latest, macos-latest ]
+        jdk: [ 11, 14 ]
+        distribution: [ zulu, adopt-hotspot, adopt-openj9 ]
+    runs-on: ${{ matrix.os }}
     steps:
       - name: test
         shell: bash
