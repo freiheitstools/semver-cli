@@ -4,6 +4,14 @@
 [abstract]
 _semver_ is a commandline client to process and manipulate semantic version numbers according to the https://semver.org/[semantic versioning specification 2.0.0^] on the command line.
 
+== Examples
+
+.jjj
+----
+$ semver nextmajor 193.94.2
+194.0.0
+----
+
 
 
 https://xxx[]
