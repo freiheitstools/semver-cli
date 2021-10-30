@@ -30,3 +30,12 @@ jobs:
         with:
           path: ~/.m2/repository
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/pom.xml') }}
+
+      - name: Building the Application with Maven
+        timeout-minutes: 60
+        shell: bash
+        run: |
+          set -e
+          mvn -B \
+              --no-transfer-progress \
+              clean install
