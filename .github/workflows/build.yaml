@@ -1,0 +1,17 @@
+name: XXX Build
+
+on:
+  workflow_dispatch:
+
+jobs:
+  XXX:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ ubuntu-latest, macos-latest ]
+        jdk: [ 8, 11, 14 ]
+
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout Git Repository
+        uses: actions/checkout@v2

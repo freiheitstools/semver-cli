@@ -43,6 +43,9 @@
               <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
               <mainClass>fhg.tooling.semver.cli.SemVer</mainClass>
             </manifest>
+            <manifestEntries>
+              <cliname>semver</cliname>
+            </manifestEntries>
           </archive>
           <descriptorRefs>
             <descriptorRef>jar-with-dependencies</descriptorRef>
