@@ -10,8 +10,10 @@ jobs:
       fail-fast: false
       matrix:
         os: [ ubuntu-latest, macos-latest ]
-        jdk: [ 11, 14, 15, 16 ]
-        distribution: [ zulu, adopt-hotspot, adopt-openj9 ]
+        jdk: [ 11 ]
+         #jdk: [ 11, 14, 15, 16 ]
+        #distribution: [ zulu, adopt-hotspot, adopt-openj9 ]
+        distribution: [ adopt-hotspot ]
 
     runs-on: ${{ matrix.os }}
     steps:
