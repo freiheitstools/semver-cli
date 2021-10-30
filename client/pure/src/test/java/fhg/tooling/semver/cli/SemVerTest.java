@@ -41,7 +41,7 @@ class SemVerTest {
             expectedOutput.append("  validate   Validates a given version\n");
 
             assertThat(outputStreamCaptor.toString()).isEqualTo(expectedOutput.toString());
-            assertThat(exitCode).isEqualTo(1);
+            assertThat(exitCode).isEqualTo(0);
         }
     }
 
