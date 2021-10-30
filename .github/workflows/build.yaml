@@ -61,7 +61,7 @@ jobs:
         id: git-checkout
         uses: actions/checkout@v2
 
-      - name: Setup local cached Maven Repository
+      - name: Setup local cached Maven repository
         id: setup-cached-repo
         uses: actions/cache@v2
         env:
@@ -82,7 +82,19 @@ jobs:
           arch: 'amd64'
 
       - name: Install native-image component
+        id: setup-graalvm-native-image
+        shell: bash
         run: |
           set -x
           gu install native-image
+
+      - name: Building the native application with Maven
+        id: maven-build
+        timeout-minutes: 60
+        shell: bash
+        run: |
+          set -e
+          mvn -B -P -native \
+              --no-transfer-progress \
+              clean install
 
