@@ -83,5 +83,6 @@ jobs:
 
       - name: Install native-image component
         run: |
+          set -x
           ${{ matrix.gu-binary }} install native-image
 
