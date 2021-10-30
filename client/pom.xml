@@ -19,8 +19,16 @@
     <modules>
         <module>pure</module>
         <module>ueberjar</module>
-        <module>native-macos-x86</module>
-        <module>native-linux-x86</module>
     </modules>
 
+    <profiles>
+        <profile>
+            <id>native-build</id>
+
+            <modules>
+                <module>native-macos-x86</module>
+                <module>native-linux-x86</module>
+            </modules>
+        </profile>
+    </profiles>
 </project>
