@@ -2,6 +2,7 @@ name: XXX Build
 
 on:
   workflow_dispatch:
+  push:
 
 jobs:
   XXX:
