@@ -54,7 +54,6 @@ jobs:
       matrix:
         os: [ ubuntu-latest, macos-latest ]
         jdk: [ 11 ]
-        distribution: [ zulu, adopt-hotspot, adopt-openj9 ]
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout Git Repository
