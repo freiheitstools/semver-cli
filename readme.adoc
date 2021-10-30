@@ -6,10 +6,16 @@ _semver_ is a commandline client to process and manipulate semantic version numb
 
 == Examples
 
-.jjj
+.Getting the next major version for a given version number
 ----
 $ semver nextmajor 193.94.2
 194.0.0
+----
+
+.Getting the version number for a release candidate
+----
+$ semver nextpatch --suffix=RC-1 4.5.6-SNAPSHOT
+4.5.7-RC-1
 ----
 
 
