@@ -50,10 +50,20 @@ jobs:
       fail-fast: false
       matrix:
         os: [ ubuntu-latest, macos-latest ]
-        jdk: [ 11, 14 ]
+        jdk: [ 11 ]
         distribution: [ zulu, adopt-hotspot, adopt-openj9 ]
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout Git Repository
         id: git-checkout
         uses: actions/checkout@v2
+
+      - name: Setup local cached Maven Repository
+        id: setup-cached-repo
+        uses: actions/cache@v2
+        env:
+          cache-name: maven-local-repository-cache
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/pom.xml') }}
+
