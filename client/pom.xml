@@ -21,6 +21,7 @@
         <module>ueberjar</module>
     </modules>
 
+    <!--
     <profiles>
         <profile>
             <id>native-build</id>
@@ -31,4 +32,5 @@
             </modules>
         </profile>
     </profiles>
+    -->
 </project>
