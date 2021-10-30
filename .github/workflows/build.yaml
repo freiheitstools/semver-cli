@@ -16,15 +16,18 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout Git Repository
+        id: git-checkout
         uses: actions/checkout@v2
 
-      - name: Setup JDK
+      - name: Setup JDK ${{ matrix.jdk }}
+        id: setup-jdk
         uses: actions/setup-java@v2
         with:
           java-version: ${{ matrix.jdk }}
           distribution: ${{ matrix.distribution }}
 
       - name: Setup local cached Maven Repository
+        id: setup-cached-repo
         uses: actions/cache@v2
         env:
           cache-name: maven-local-repository-cache
@@ -33,6 +36,7 @@ jobs:
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/pom.xml') }}
 
       - name: Building the Application with Maven
+        id: maven-build
         timeout-minutes: 60
         shell: bash
         run: |
