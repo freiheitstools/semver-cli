@@ -23,7 +23,7 @@ jobs:
           java-version: ${{ matrix.jdk }}
           distribution: ${{ matrix.distribution }}
 
-      - name: Setup local Maven Repository
+      - name: Setup local cached Maven Repository
         uses: actions/cache@v2
         env:
           cache-name: maven-local-repository-cache
