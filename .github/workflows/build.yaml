@@ -44,7 +44,7 @@ jobs:
         shell: bash
         run: |
           set -e
-          mvn -B -P -native \
+          mvn -B \
               --no-transfer-progress \
               clean install
   YYYY:
