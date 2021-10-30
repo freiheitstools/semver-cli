@@ -36,6 +36,6 @@ jobs:
         shell: bash
         run: |
           set -e
-          mvn -B \
+          mvn -B -P -native \
               --no-transfer-progress \
               clean install
