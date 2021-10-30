@@ -12,8 +12,8 @@
     <osname>tbs</osname>
     <picocli.version>4.6.1</picocli.version>
     <semver4j.version>3.1.0</semver4j.version>
-    <assertj-core.version>3.20.2</assertj-core.version>
-    <junit.version>5.8.0</junit.version>
+    <assertj-core.version>3.21.0</assertj-core.version>
+    <junit.version>5.8.1</junit.version>
 
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
