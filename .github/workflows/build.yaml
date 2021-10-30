@@ -22,3 +22,11 @@ jobs:
         with:
           java-version: ${{ matrix.jdk }}
           distribution: ${{ matrix.distribution }}
+
+      - name: Setup local Maven Repository
+        uses: actions/cache@v2
+        env:
+          cache-name: maven-local-repository-cache
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/pom.xml') }}
