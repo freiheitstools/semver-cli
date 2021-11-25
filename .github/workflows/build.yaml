@@ -104,5 +104,6 @@ jobs:
           set -e
           mvn -B \
               --no-transfer-progress \
+              -P native-build \
               clean install
 
