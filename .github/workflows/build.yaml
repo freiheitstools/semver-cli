@@ -87,6 +87,14 @@ jobs:
         run: |
           set -x
           gu install native-image
+
+      - name: Check version of native image
+        id: setup-graalvm-native-image-version-check
+        shell: bash
+        run: |
+          native-image --version
+
+
       ### - name: Building the native application with Maven
       ###   id: maven-build
       ###   timeout-minutes: 60
