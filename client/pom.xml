@@ -27,7 +27,7 @@
             <id>native-build</id>
 
             <modules>
-                <!--module>native-macos-x86</--module-->
+                <!--module>native-macos-x86</module-->
                 <module>native-linux-x86</module>
             </modules>
         </profile>
