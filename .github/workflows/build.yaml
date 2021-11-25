@@ -95,13 +95,14 @@ jobs:
           native-image --version
 
 
-      ### - name: Building the native application with Maven
-      ###   id: maven-build
-      ###   timeout-minutes: 60
-      ###   shell: bash
-      ###   run: |
-      ###     set -e
-      ###     mvn -B -P native-build \
-      ###         --no-transfer-progress \
-      ###         clean install
+      - name: Building the native application with Maven
+        id: maven-build
+        timeout-minutes: 60
+        shell: bash
+        # -P native-build
+        run: |
+          set -e
+          mvn -B \
+              --no-transfer-progress \
+              clean install
 
