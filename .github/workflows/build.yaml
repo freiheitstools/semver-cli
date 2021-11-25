@@ -11,8 +11,8 @@ jobs:
       matrix:
         #os: [ ubuntu-latest ]
         os: [ ubuntu-latest, macos-latest ]
-        jdk: [ 11 ]
-         #jdk: [ 11, 14, 15, 16 ]
+        #jdk: [ 11 ]
+        jdk: [ 11, 14, 15, 16 ]
         #distribution: [ zulu, adopt-hotspot, adopt-openj9 ]
         distribution: [ adopt-hotspot ]
 
