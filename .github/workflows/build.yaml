@@ -53,7 +53,7 @@ jobs:
       fail-fast: false
       matrix:
         #os: [ macos-latest ]
-        os: [ ubuntu-latest, macos-latest ]
+        os: [ ubuntu-latest ] #, macos-latest ]
         jdk: [ 11 ]
     runs-on: ${{ matrix.os }}
     steps:
@@ -87,14 +87,13 @@ jobs:
         run: |
           set -x
           gu install native-image
-
-      - name: Building the native application with Maven
-        id: maven-build
-        timeout-minutes: 60
-        shell: bash
-        run: |
-          set -e
-          mvn -B -P native-build \
-              --no-transfer-progress \
-              clean install
+      ### - name: Building the native application with Maven
+      ###   id: maven-build
+      ###   timeout-minutes: 60
+      ###   shell: bash
+      ###   run: |
+      ###     set -e
+      ###     mvn -B -P native-build \
+      ###         --no-transfer-progress \
+      ###         clean install
 
