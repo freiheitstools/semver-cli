@@ -49,7 +49,22 @@
                     <plugin>
                         <groupId>org.graalvm.nativeimage</groupId>
                         <artifactId>native-image-maven-plugin</artifactId>
+                        <version>21.2.0</version>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>native-image</goal>
+                                </goals>
+                                <phase>package</phase>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <imageName>semver.${osname}.${os.arch}.bin</imageName>
+                            <mainClass>fhg.tooling.semver.cli.SemVer</mainClass>
+                            <buildArgs>--verbose</buildArgs>
+                        </configuration>
                     </plugin>
+
                 </plugins>
             </build>
         </profile>
