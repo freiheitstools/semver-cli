@@ -27,13 +27,17 @@
         <profile>
             <id>native</id>
             <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <!--
+            <activation>
                 <os>
                     <arch>x86_64</arch>
                     <family>mac</family>
                     <name>mac os x</name>
                 </os>
             </activation>
-
+-->
             <properties>
                 <osname>macos</osname>
             </properties>

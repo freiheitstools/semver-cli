@@ -52,6 +52,11 @@
           </descriptorRefs>
         </configuration>
       </plugin>
+
+      <plugin>
+        <groupId>org.graalvm.nativeimage</groupId>
+        <artifactId>native-image-maven-plugin</artifactId>
+      </plugin>
     </plugins>
   </build>
 </project>

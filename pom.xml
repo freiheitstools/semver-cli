@@ -82,6 +82,7 @@
             </execution>
           </executions>
           <configuration>
+
             <imageName>semver.${osname}.${os.arch}.bin</imageName>
             <mainClass>fhg.tooling.semver.cli.SemVer</mainClass>
             <buildArgs>--verbose</buildArgs>
