@@ -40,9 +40,10 @@ Usage: semver [-hV] [COMMAND]
   -h, --help      Show this help message and exit.
   -V, --version   Print version information and exit.
 Commands:
-  nextmajor  Return the next major version for a given version
-  nextminor  Return the next minor version for a given version
-  nextpatch  Return the next patch version for a given version
-  strip      Returns the version without suffix and build number
-  validate   Validates a given version
+  isreleaseversion  Checks if version is a release version
+  nextmajor         Return the next major version for a given version
+  nextminor         Return the next minor version for a given version
+  nextpatch         Return the next patch version for a given version
+  strip             Returns the version without suffix and build number
+  validate          Validates a given version
 ----

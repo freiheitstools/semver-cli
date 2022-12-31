@@ -1,10 +1,6 @@
 package fhg.tooling.semver.cli;
 
-import fhg.tooling.semver.cli.subcommands.NextMajorSubcommand;
-import fhg.tooling.semver.cli.subcommands.NextMinorSubcommand;
-import fhg.tooling.semver.cli.subcommands.NextPatchSubcommand;
-import fhg.tooling.semver.cli.subcommands.StripSubcommand;
-import fhg.tooling.semver.cli.subcommands.ValidateSubcommand;
+import fhg.tooling.semver.cli.subcommands.*;
 import picocli.CommandLine;
 
 import java.io.IOException;
@@ -18,6 +14,7 @@ import java.util.jar.Manifest;
         mixinStandardHelpOptions = true,
         name = "semver",
         subcommands = {
+                ReleaseVersionSubcommand.class,
                 NextMajorSubcommand.class, NextMinorSubcommand.class,
                 NextPatchSubcommand.class, StripSubcommand.class,
                 ValidateSubcommand.class},
