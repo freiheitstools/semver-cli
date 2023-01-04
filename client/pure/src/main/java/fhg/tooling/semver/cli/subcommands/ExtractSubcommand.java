@@ -1,12 +1,18 @@
 package fhg.tooling.semver.cli.subcommands;
 
+import java.util.Arrays;
 import java.util.concurrent.Callable;
+import java.util.stream.Collectors;
 
 import com.vdurmont.semver4j.Semver;
 import com.vdurmont.semver4j.SemverException;
 import fhg.tooling.semver.cli.ExitCodes;
 import picocli.CommandLine;
 
+/**
+ * Subcommand to extract single parts, e.g. major number or patch level,
+ * of a given version number.
+ */
 @CommandLine.Command(name = "extract",
         description = "Allows to extract single parts from a version number")
 public class ExtractSubcommand
@@ -39,17 +45,30 @@ public class ExtractSubcommand
     public Integer call() throws Exception {
         try {
             Semver semver = new Semver(versionParameter.getVersion());
+            String part = getRequestedPart(exclusive, semver);
 
-            
-
-            //Semver stripped = semver.withClearedSuffixAndBuild();
-            //printer.printVersion(outputOptions.noNewLine, stripped, System.out);
-
+            printer.printVersion(outputOptions.noNewLine, part, System.out);
         } catch (SemverException e) {
             System.err.println(e.getMessage());
             return ExitCodes.INVALID_VERSION_IDENTIFIER;
         }
 
         return ExitCodes.SUCCESS;
+    }
+
+    private String getRequestedPart(Exclusive exclusive, Semver semver) {
+        if (exclusive.extractMajorNumber) {
+            return String.valueOf(semver.getMajor());
+        } else if (exclusive.extractMinorNumber) {
+            return String.valueOf(semver.getMinor());
+        } else if (exclusive.extractPatchLevel) {
+            return String.valueOf(semver.getPatch());
+        } else if (exclusive.extractBuildInformation) {
+            return String.valueOf(semver.getBuild());
+        } else if (exclusive.extractPreReleaseIdentifier) {
+            return Arrays.stream(semver.getSuffixTokens()).collect(Collectors.joining());
+        }
+
+        throw new IllegalStateException();
     }
 }
