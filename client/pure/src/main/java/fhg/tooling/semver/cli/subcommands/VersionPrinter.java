@@ -16,4 +16,12 @@ public class VersionPrinter {
 
         output.print(formatResult);
     }
+
+    public void printVersion(boolean skipNewLine, String version, PrintStream output) {
+        String effectiveFormat = skipNewLine ? FORMAT_WITHOUT_NEWLINE : FORMAT_WITH_NEWLINE;
+        String formatResult = format(effectiveFormat, version);
+
+        output.print(formatResult);
+    }
+
 }

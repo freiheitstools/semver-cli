@@ -40,6 +40,7 @@ class SemVerTest {
             expectedOutput.append("  -h, --help      Show this help message and exit.\n");
             expectedOutput.append("  -V, --version   Print version information and exit.\n");
             expectedOutput.append("Commands:\n");
+            expectedOutput.append("  extract    Allows to extract single parts from a version number\n");
             expectedOutput.append("  nextmajor  Return the next major version for a given version\n");
             expectedOutput.append("  nextminor  Return the next minor version for a given version\n");
             expectedOutput.append("  nextpatch  Return the next patch version for a given version\n");
