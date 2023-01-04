@@ -27,6 +27,7 @@
     <!-- Controls the build of a native image of the tool -->
     <skipNativeBuild>false</skipNativeBuild>
     <semverparser.version>0.1.0-SNAPSHOT</semverparser.version>
+    <commons-lang3.version>3.8.1</commons-lang3.version>
   </properties>
 
   <modules>
@@ -58,6 +59,12 @@
         <type>pom</type>
         <scope>import</scope>
       </dependency>
+      <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-lang3</artifactId>
+        <version>${commons-lang3.version}</version>
+      </dependency>
+
     </dependencies>
   </dependencyManagement>
 
@@ -149,10 +156,10 @@
           <version>3.8.1</version>
           <configuration>
             <encoding>UTF-8</encoding>
-            <source>17</source>
-            <target>17</target>
-            <testSource>17</testSource>
-            <testTarget>17</testTarget>
+            <source>11</source>
+            <target>11</target>
+            <testSource>11</testSource>
+            <testTarget>11</testTarget>
             <annotationProcessorPaths>
               <path>
                 <groupId>info.picocli</groupId>
