@@ -1,5 +1,7 @@
 package fhg.tooling.semver.cli.subcommands;
 
+import fhg.tooling.semver.cli.ExitCodes;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -116,10 +118,6 @@ class ExtractSubcommandTest {
             assertThat(parseResult.matchedPositional(0).<String>getValue()).isEqualTo("4.5.6");
         }
 
-
-
-        // todo -4 und --prerelease ist identisch
-
         @ParameterizedTest
         @ValueSource(strings = {"-4", "--prerelease"})
         void callWithEachOptionToGetThePreReleaseIdentifierWorks(String option) {
@@ -202,7 +200,7 @@ class ExtractSubcommandTest {
             }
 
             assertThat(outputStreamCaptor.toString()).isEqualTo("4");
-            assertThat(exitCode).isEqualTo(0);
+            assertThat(exitCode).isEqualTo(ExitCodes.SUCCESS);
         }
 
         @ParameterizedTest
@@ -224,7 +222,7 @@ class ExtractSubcommandTest {
             }
 
             assertThat(outputStreamCaptor.toString()).isEqualTo("6");
-            assertThat(exitCode).isEqualTo(0);
+            assertThat(exitCode).isEqualTo(ExitCodes.SUCCESS);
         }
 
         @ParameterizedTest
@@ -246,7 +244,7 @@ class ExtractSubcommandTest {
             }
 
             assertThat(outputStreamCaptor.toString()).isEqualTo("0");
-            assertThat(exitCode).isEqualTo(0);
+            assertThat(exitCode).isEqualTo(ExitCodes.SUCCESS);
         }
 
         @ParameterizedTest
@@ -268,7 +266,7 @@ class ExtractSubcommandTest {
             }
 
             assertThat(outputStreamCaptor.toString()).isEqualTo("pre");
-            assertThat(exitCode).isEqualTo(0);
+            assertThat(exitCode).isEqualTo(ExitCodes.SUCCESS);
         }
 
         @ParameterizedTest
@@ -290,12 +288,12 @@ class ExtractSubcommandTest {
             }
 
             assertThat(outputStreamCaptor.toString()).isEqualTo("build");
-            assertThat(exitCode).isEqualTo(0);
+            assertThat(exitCode).isEqualTo(ExitCodes.SUCCESS);
         }
 
         @ParameterizedTest
         @ValueSource(strings = {"-6", "--suffix"})
-        void extractingOfrSuffixWorks(String option) {
+        void extractingOfSuffixWorks(String option) {
             PrintStream stdoutStream = System.out;
             ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
             System.setOut(new PrintStream(outputStreamCaptor));
@@ -311,7 +309,170 @@ class ExtractSubcommandTest {
             }
 
             assertThat(outputStreamCaptor.toString()).isEqualTo("pre+build");
-            assertThat(exitCode).isEqualTo(0);
+            assertThat(exitCode).isEqualTo(ExitCodes.SUCCESS);
+        }
+
+        @Test
+        void extractingOfBuildIfBuildIsNotPresentLeadsToAFailureIfNotFailsafe() {
+            PrintStream stdoutStream = System.out;
+            ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
+            System.setOut(new PrintStream(outputStreamCaptor));
+            int exitCode = -1;
+
+            try {
+                ExtractSubcommand command = new ExtractSubcommand();
+                CommandLine cmdline = new CommandLine(command);
+
+                exitCode = cmdline.execute("--no-newline", "--build",
+                                           "--fail-safe", "1.4.5-alpha");
+            } finally {
+                System.setOut(stdoutStream);
+            }
+
+            assertThat(outputStreamCaptor.toString()).isNotNull().isEmpty();
+            assertThat(exitCode).isEqualTo(ExitCodes.SUCCESS);
+        }
+
+        @Test
+        void extractingOfBuildIfBuildIsNotPresentReturnsEmptyStringIfFailsafe() {
+            PrintStream stdoutStream = System.out;
+            ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
+            System.setOut(new PrintStream(outputStreamCaptor));
+            int exitCode = -1;
+
+            try {
+                ExtractSubcommand command = new ExtractSubcommand();
+                CommandLine cmdline = new CommandLine(command);
+
+                exitCode = cmdline.execute("--no-newline", "--build",
+                                           "--fail-safe", "1.4.5-alpha");
+            } finally {
+                System.setOut(stdoutStream);
+            }
+
+            assertThat(outputStreamCaptor.toString()).isNotNull().isEmpty();
+            assertThat(exitCode).isEqualTo(ExitCodes.SUCCESS);
+        }
+
+        @Test
+        void extractingOfMajorNumberMajorNumberIsNotPresentReturnsEmptyString() {
+            PrintStream stdoutStream = System.out;
+            ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
+            System.setOut(new PrintStream(outputStreamCaptor));
+            int exitCode = -1;
+
+            try {
+                ExtractSubcommand command = new ExtractSubcommand();
+                CommandLine cmdline = new CommandLine(command);
+
+                exitCode = cmdline.execute("--no-newline", "--suffix", ".4.5-alpha");
+            } finally {
+                System.setOut(stdoutStream);
+            }
+
+            assertThat(outputStreamCaptor.toString()).isNotNull().isEmpty();
+            assertThat(exitCode).isEqualTo(ExitCodes.INVALID_VERSION_IDENTIFIER);
+        }
+
+        @Test
+        void extractingOfMinorNumberMinorNumberIsNotPresentReturnsEmptyString() {
+            PrintStream stdoutStream = System.out;
+            ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
+            System.setOut(new PrintStream(outputStreamCaptor));
+            int exitCode = -1;
+
+            try {
+                ExtractSubcommand command = new ExtractSubcommand();
+                CommandLine cmdline = new CommandLine(command);
+
+                exitCode = cmdline.execute("--no-newline", "--suffix", "1-alpha");
+            } finally {
+                System.setOut(stdoutStream);
+            }
+
+            assertThat(outputStreamCaptor.toString()).isNotNull().isEmpty();
+            assertThat(exitCode).isEqualTo(ExitCodes.INVALID_VERSION_IDENTIFIER);
+        }
+
+        @Test
+        void extractingOfPatchLevelIfPatchLevelIsNotPresentReturnsEmptyString() {
+            PrintStream stdoutStream = System.out;
+            ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
+            System.setOut(new PrintStream(outputStreamCaptor));
+            int exitCode = -1;
+
+            try {
+                ExtractSubcommand command = new ExtractSubcommand();
+                CommandLine cmdline = new CommandLine(command);
+
+                exitCode = cmdline.execute("--no-newline", "--suffix", "1.4.");
+            } finally {
+                System.setOut(stdoutStream);
+            }
+
+            assertThat(outputStreamCaptor.toString()).isNotNull().isEmpty();
+            assertThat(exitCode).isEqualTo(ExitCodes.INVALID_VERSION_IDENTIFIER);
+        }
+
+        @Test
+        void extractingOfPreReleaseIfPreReleaseIsNotPresentLeadsToAFailureIfNotFailsafe() {
+            PrintStream stdoutStream = System.out;
+            ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
+            System.setOut(new PrintStream(outputStreamCaptor));
+            int exitCode = -1;
+
+            try {
+                ExtractSubcommand command = new ExtractSubcommand();
+                CommandLine cmdline = new CommandLine(command);
+
+                exitCode = cmdline.execute("--no-newline", "--prerelease", "4.6.0");
+            } finally {
+                System.setOut(stdoutStream);
+            }
+
+            assertThat(outputStreamCaptor.toString()).isEmpty();
+            assertThat(exitCode).isEqualTo(ExitCodes.MISSING_SEGMENT);
+        }
+
+        @Test
+        void extractingOfPreReleaseIfPreReleaseIsNotPresentReturnsEmptyStringIfFailsafe() {
+            PrintStream stdoutStream = System.out;
+            ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
+            System.setOut(new PrintStream(outputStreamCaptor));
+            int exitCode = -1;
+
+            try {
+                ExtractSubcommand command = new ExtractSubcommand();
+                CommandLine cmdline = new CommandLine(command);
+
+                exitCode = cmdline.execute("--no-newline", "--prerelease",
+                                           "--fail-safe", "4.6.0");
+            } finally {
+                System.setOut(stdoutStream);
+            }
+
+            assertThat(outputStreamCaptor.toString()).isEmpty();
+            assertThat(exitCode).isEqualTo(ExitCodes.SUCCESS);
+        }
+
+        @Test
+        void extractingOfSuffixIfSuffixIsNotPresentReturnsEmptyStringAndNotNull() {
+            PrintStream stdoutStream = System.out;
+            ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
+            System.setOut(new PrintStream(outputStreamCaptor));
+            int exitCode = -1;
+
+            try {
+                ExtractSubcommand command = new ExtractSubcommand();
+                CommandLine cmdline = new CommandLine(command);
+
+                exitCode = cmdline.execute("--no-newline", "--suffix", "4.6.0");
+            } finally {
+                System.setOut(stdoutStream);
+            }
+
+            assertThat(outputStreamCaptor.toString()).isNotNull().isEmpty();
+            assertThat(exitCode).isEqualTo(ExitCodes.MISSING_SEGMENT);
         }
 
         static Stream<Arguments> provideVersionsAndExpectedResultForSuffixExtraction() {
@@ -335,7 +496,7 @@ class ExtractSubcommandTest {
                 ExtractSubcommand command = new ExtractSubcommand();
                 CommandLine cmdline = new CommandLine(command);
 
-                exitCode = cmdline.execute("-6", "--no-newline", version);
+                exitCode = cmdline.execute("-6", "--no-newline", "--fail-safe", version);
             } finally {
                 System.setOut(stdoutStream);
             }
