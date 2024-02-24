@@ -1,0 +1,16 @@
+= semver, a Commandline Processor for Semantic Version Numbers
+:showtitle:
+:page-title: semver, a commandline processor for semantic version numbers
+:page-description: Homepage of semver, a command line processor for semantic version numbers, mainly intended to be used in CI/CD enviroments and for scripting
+
+semver is a command processor for checking and manipulating semantic version numbers.
+It is primarily intended for automation in continuous integration and continuous delivery environments.
+It can also be used in scripts as well as directly on the command line.
+
+== Usage examples
+
+[source]
+----
+include::gen-example-usage-output.incl[]
+----
+
