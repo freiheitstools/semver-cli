@@ -11,4 +11,4 @@ pom.xml.releaseBackup
 *.ignore.sh
 target
 /.mvn
-.incl
+*.incl
