@@ -25,7 +25,7 @@ function run_example() {
 
   printf '$ ' > ${OUTOUT}
   tail -n +3 ${SCRIPT} >> ${OUTOUT}
-  ${SCRIPT} >> ${OUTOUT}
+  ${SCRIPT} 2&>1 >> ${OUTOUT}
 }
 
 export SEMVER
@@ -36,6 +36,7 @@ LANG=C find . \
   -name "${SCRIPT_PREFIX}*" \
   -not -name "*.${OUTPUT_EXTENSION}" \
   -print \
+  | grep -v _site \
   | while read file; do run_example ${file} ; done
 
 

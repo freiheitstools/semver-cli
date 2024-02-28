@@ -7,10 +7,41 @@ semver is a command processor for checking and manipulating semantic version num
 It is primarily intended for automation in continuous integration and continuous delivery environments.
 It can also be used in scripts as well as directly on the command line.
 
-== Usage examples
+== Usage
 
 [source]
 ----
 include::gen-example-usage-output.incl[]
 ----
+
+== Usage examples
+
+.Check if a given Version Number is valid
+[source]
+----
+include::gen-example-validate-given-version.incl[]
+----
+
+
+.Compute the next Patchlevel Version of a given one
+[source]
+----
+include::gen-example-get-next-patchlevel-version.incl[]
+----
+
+.Compute the next Minor Version of a given one
+[source]
+----
+include::gen-example-get-next-minor-version.incl[]
+----
+
+.Compute the next Major Version of a given one
+[source]
+----
+include::gen-example-get-next-major-version.incl[]
+----
+
+
+
+
 
