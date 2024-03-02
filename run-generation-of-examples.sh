@@ -25,7 +25,7 @@ function run_example() {
 
   printf '$ ' > ${OUTOUT}
   tail -n +3 ${SCRIPT} >> ${OUTOUT}
-  ${SCRIPT} 2&>1 >> ${OUTOUT}
+  ${SCRIPT} >> ${OUTOUT} 2>&1
 }
 
 export SEMVER

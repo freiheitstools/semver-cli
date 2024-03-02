@@ -12,3 +12,4 @@ pom.xml.releaseBackup
 target
 /.mvn
 *.incl
+_site/
