@@ -1,0 +1,54 @@
+= How to setup the Homepage
+
+The project homepage is build with Jekyll in conjunction with the Asciidoctor plugin for Asciidoctor.
+This document describes how setup Ruby and Jekyll on your machine.
+
+== Installing Ruby
+
+To build with and to run with Jekyll you need Ruby 3.2.x installed on your machine.
+It is recommended to manage your Ruby installations via an package manager as _rbenv_.
+
+First you have to check the version currently available on your machine with _rbenv_.
+
+.List installed Ruby versions on your machine
+----
+$ rbenv versions
+* system
+  3.1.4
+----
+
+If a 3.2.x version is missing on your machine, check which 3.2.x versions are available and install one of them on your machine.
+
+.List versions available to _rbenv_
+----
+$ rbenv install -l
+3.0.6
+3.1.4
+3.2.3
+3.3.0
+jruby-9.4.5.0
+mruby-3.2.0
+picoruby-3.0.0
+truffleruby-23.1.2
+truffleruby+graalvm-23.1.2
+----
+
+.Install a new version of Ruby via _rbenv_
+----
+$ rbenv install 3.2.3
+ruby-build: using openssl@3 from homebrew
+==> Downloading ruby-3.2.3.tar.gz...
+==> Installing ruby-3.2.3...
+----
+
+Afterwards you have to set the selected Ruby version via _rbenv_.
+
+.Setting the used Ruby version per directory
+----
+$ rbenv shell 3.2.3
+$ ruby --version
+ruby 3.2.3 (2024-01-18 revision 52bb2ac0a6) [arm64-darwin23]
+----
+
+
+
