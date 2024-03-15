@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 # Small script to run all scripts for generation of examples for
 # the webpage, the readme as well the documentation
