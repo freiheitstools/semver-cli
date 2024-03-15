@@ -1,0 +1,7 @@
+bundler install
+
+
+Run jekyll in context of the bundle
+
+gem install jekyll bundler
+
