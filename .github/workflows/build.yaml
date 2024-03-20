@@ -1,20 +1,22 @@
-name: XXX Build
+name: AAA
 
 on:
   workflow_dispatch:
   push:
-
-
 
 jobs:
   build:
     strategy:
       fail-fast: false
       matrix:
-        os: [macos-latest, ubuntu-latest]
+        os: [ubuntu-latest]
+        #os: [macos-latest, ubuntu-latest]
         jdk: [ 17 ]
 
     runs-on: ${{ matrix.os }}
+    outputs:
+      native_filename: ${{ steps.show-result.outputs.native_filename }}
+
     steps:
       - name: Checkout Git Repository
         id: git-checkout
@@ -43,7 +45,7 @@ jobs:
         run: |
           PROJECT_VERSION=$(mvn -q -DforceStdout help:evaluate -Dexpression=project.version)
           echo "project_version=${PROJECT_VERSION}" >> ${GITHUB_OUTPUT}
-          
+
           PROJECT_ARCH=$(mvn -q -DforceStdout help:evaluate -Dexpression=os.arch)
           echo "project_arch=${PROJECT_ARCH}" >> ${GITHUB_OUTPUT}
           
@@ -63,7 +65,7 @@ jobs:
           cache-name: maven-local-repository-cache
         with:
           path: ~/.m2/repository
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/pom.xml') }}
+          key: ${{ runner.os }}-build-${{ github.run_id }}
 
       - name: Build
         id: maven-build
@@ -74,12 +76,17 @@ jobs:
         id: show-result
         run: |
           ls -lha client/pure/target/
-            
+
           UEBERJAR_FILENAME=$( basename $( ls client/pure/target/semver*.jar ))
           echo "ueberjar_filename=${UEBERJAR_FILENAME}" >> ${GITHUB_OUTPUT}
 
           NATIVE_FILENAME=$( basename $( ls client/pure/target/semver*.bin ))
           echo "native_filename=${NATIVE_FILENAME}" >> ${GITHUB_OUTPUT}
+
+      - name: Check Execution of Native Binary
+        id: check-binary-native
+        shell: bash
+        run: ./client/pure/target/${{ steps.show-result.outputs.native_filename }} --help
 
       - name: Upload native binary
         uses: actions/upload-artifact@v3
@@ -94,3 +101,16 @@ jobs:
           name: ${{ steps.show-result.outputs.ueberjar_filename }}
           path: client/pure/target/${{ steps.show-result.outputs.ueberjar_filename }}
           if-no-files-found: error
+
+      - name: Create Binary with Canonical Name
+        id: canonical-binary
+        shell: bash
+        run: cp client/pure/target/${{ steps.show-result.outputs.native_filename }} semver; ls -lha
+
+
+      - name: Cache Native Binary
+        id: cache-native-binary
+        uses: actions/cache/save@v4
+        with:
+          path: semver
+          key: ${{ runner.os }}-build-${{ hashFiles('**/package-lock.java', '**/pom.xml') }}

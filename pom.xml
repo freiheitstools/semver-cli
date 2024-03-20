@@ -27,6 +27,13 @@
 
     <!-- Controls the build of a native image of the tool -->
     <skipNativeBuild>false</skipNativeBuild>
+    <!--
+     ! This property can be overridden on the command line. This feature
+     ! is used in the publish workflow for the homepage. The reason for this
+     ! is, that we need a predictable name or the binary, as the binary it-self
+     ! is used in the workflow.
+     !-->
+    <graal.imagename>semver-${project.version}-${os.family}.${os.arch}.bin</graal.imagename>
   </properties>
 
   <modules>
@@ -130,7 +137,7 @@
             </execution>
           </executions>
           <configuration>
-            <imageName>semver-${project.version}-${os.family}.${os.arch}.bin</imageName>
+            <imageName>${graal.imagename}</imageName>
             <mainClass>fhg.tooling.semver.cli.SemVer</mainClass>
             <buildArgs>--verbose</buildArgs>
             <skip>${skipNativeBuild}</skip>

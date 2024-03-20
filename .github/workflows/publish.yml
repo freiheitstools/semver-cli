@@ -1,10 +1,14 @@
 # see https://github.com/actions/starter-workflows/blob/main/pages/jekyll.yml for reference
-name: Publish to GitHub Pages
+name: BBB
 on:
-  push:
+  #push:
  #   branches: [main, master]
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
+  workflow_run:
+    workflows: [AAA]
+    types:
+      - completed
 
 concurrency:
   group: github-pages
@@ -21,26 +25,68 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
+      - name: Version of Bash
+        shell: bash
+        run: /usr/bin/env bash --version
+
+      - name: FIND
+        shell: bash
+        run: |
+          #find . -type f \( -name "semver*.bin" -or -name "semver" \) \! -path "*_site*" \( -perm -u=x -and -perm -g=x -and -perm -o=x \) -print -quit  
+          find . -type f \( -name "semver*.bin" -or -name "semver" \)   
+        
+    
+
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: XXXXXXXXXXX
+        id: xxxxxxxxxxcache-primes-restore
+        uses: actions/cache/restore@v4
+        with:
+          path: |
+            semver
+          key: ${{ runner.os }}-build-${{ hashFiles('**/package-lock.java', '**/pom.xml') }}
+
+      # Diesen Step entfernen! // todo
+      - name: Generate Examples
+        shell: bash
+        run: |
+          ls -lha; ./semver --version
+          find . -type f \( -name "semver*.bin" -or -name "semver" \)
+          find . -type f -name "semver"
+          find . -type f \( -name "semver*.bin" -or -name "semver" \) -not -path "*_site*"
+          find . -type f \( -name "semver*.bin" -or -name "semver" \) -not -path "*_site*"  \( -perm -u=x -and -perm -g=x -and -perm -o=x \)
+          
+
+      - name: Check Execution of Native Binary
+        id: check-binary-native
+        shell: bash
+        run: ./semver --help
+
+      - name: Generate Examples
+        shell: bash
+        run: ./run-generation-of-examples.sh
+
       - name: Configure Pages
         id: pages
         uses: actions/configure-pages@v3
+
       - name: Install Ruby and Jekyll
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.2'
           bundler-cache: true
           cache-version: 0
-      - name: Generate Examples
-        shell: bash
-        run: ./run-generation-of-examples.sh
+
       - name: Generate Site
         run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
         env:
           JEKYLL_ENV: production
+
       - name: Upload Artifacts
         uses: actions/upload-pages-artifact@v1
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
