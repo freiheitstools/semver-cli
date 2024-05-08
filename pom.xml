@@ -8,6 +8,13 @@
   <name>Semantic Versioning Commandline Client</name>
   <url>https://github.com/freiheitstools/semver-cli</url>
 
+  <licenses>
+    <license>
+      <name>Apache License version 2.0</name>
+      <url>https://www.apache.org/licenses/LICENSE-2.0</url>
+    </license>
+  </licenses>
+
   <properties>
     <os.family>will_be_changed_by_profiles_and_their_activation</os.family>
     <picocli.version>4.6.1</picocli.version>
