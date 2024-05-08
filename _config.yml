@@ -1,7 +1,13 @@
-title: ddddddJekyll AsciiDoc Quickstart
-# uncomment baseurl if you want to publish the site to a subfolder
-#baseurl: /blog
-description: The Jekyll AsciiDoc Quickstart project is a leg-up in starting your own website hosted on GitHub with content based in AsciiDoc.
+title: semver - Semantic versioning commandline client
+
+# The description should be always in sync with the content
+# of the mainpage of the homepage
+description: >
+  semver is a command processor for checking and manipulating 
+  semantic version numbers on the commandline. It is primarily 
+  intended for automation in continuous integration and continuous 
+  delivery environments. It can also be used in scripts as well 
+  as directly on the command line.
 exclude:
 - LICENSE
 - README.adoc
