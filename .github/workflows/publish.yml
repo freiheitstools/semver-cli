@@ -10,6 +10,9 @@ on:
     types:
       - completed
 
+# Anmerkung: workflow_dispatch und workflow_run sind nur
+# auf dem Default branch verfügbar
+
 concurrency:
   group: github-pages
   cancel-in-progress: false
