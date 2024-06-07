@@ -6,7 +6,7 @@ This document describes how setup Ruby and Jekyll on your machine.
 == Installing Ruby
 
 To build with and to run with Jekyll you need Ruby 3.2.x installed on your machine.
-It is recommended to manage your Ruby installations via an package manager as _rbenv_.
+It is recommended to manage your Ruby installations via a package manager like _rbenv_.
 
 First you have to check the version currently available on your machine with _rbenv_.
 
