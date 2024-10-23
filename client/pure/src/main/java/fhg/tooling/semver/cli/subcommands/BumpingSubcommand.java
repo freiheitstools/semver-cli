@@ -1,8 +1,8 @@
 package fhg.tooling.semver.cli.subcommands;
 
-import com.vdurmont.semver4j.Semver;
-import com.vdurmont.semver4j.SemverException;
 import fhg.tooling.semver.cli.ExitCodes;
+import io.github.freiheitstools.semver.parser.api.SemVer;
+import io.github.freiheitstools.semver.parser.api.SemVerBuilder;
 
 import java.util.function.Function;
 import java.util.stream.Stream;
@@ -21,20 +21,23 @@ abstract class BumpingSubcommand {
 
     private VersionPrinter printer = new VersionPrinter();
 
-    abstract Function<Semver, Semver> getBumpingFunction();
+    abstract Function<SemVerBuilder, SemVerBuilder> getBumpingFunction();
 
     public Integer call() {
-        try {
-            Semver result = Stream.of(versionParameter.getVersion())
-                    .map(s -> new Semver(versionParameter.getVersion()))
-                    .map(getBumpingFunction())
-                    .map(semver -> suffixOptions.getSuffix().map(semver::withSuffix).orElse(semver))
-                    .map(semver -> suffixOptions.getBuildNumber().map(semver::withBuild).orElse(semver))
-                    .findFirst().get();
+        SemVer given = SemVer.parser().parse(versionParameter.getVersion());
+
+        if (given.isValid()) {
+            SemVer result = Stream.of(given)
+                                  .map(SemVer.builder()::startFrom)
+                                  .map(getBumpingFunction())
+                                  .map(builder -> suffixOptions.getSuffix().map(builder::setPrerelease).orElse(builder))
+                                  .map(builder -> suffixOptions.getBuildNumber().map(builder::setBuild).orElse(builder))
+                                  .map(SemVerBuilder::build)
+                                  .findFirst().get();
 
             printer.printVersion(outputOptions.noNewLine, result, System.out);
-        } catch (SemverException e) {
-            System.err.println(e.getMessage());
+        } else {
+            System.err.println(versionParameter.getVersion() + " is not a valid semantic version");
             return ExitCodes.INVALID_VERSION_IDENTIFIER;
         }
 
