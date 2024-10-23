@@ -18,7 +18,6 @@
   <properties>
     <os.family>will_be_changed_by_profiles_and_their_activation</os.family>
     <picocli.version>4.6.1</picocli.version>
-    <semver4j.version>3.1.0</semver4j.version>
     <assertj-core.version>3.21.0</assertj-core.version>
     <junit.version>5.8.1</junit.version>
 
@@ -27,6 +26,7 @@
 
     <!-- Controls the build of a native image of the tool -->
     <skipNativeBuild>false</skipNativeBuild>
+    <semverparser.version>0.1.0-SNAPSHOT</semverparser.version>
   </properties>
 
   <modules>
@@ -36,9 +36,9 @@
   <dependencyManagement>
     <dependencies>
       <dependency>
-        <groupId>com.vdurmont</groupId>
-        <artifactId>semver4j</artifactId>
-        <version>${semver4j.version}</version>
+        <groupId>io.github.freiheitstools.semver.parser</groupId>
+        <artifactId>parser</artifactId>
+        <version>${semverparser.version}</version>
       </dependency>
       <dependency>
         <groupId>info.picocli</groupId>

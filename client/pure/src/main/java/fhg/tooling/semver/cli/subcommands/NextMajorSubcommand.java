@@ -1,6 +1,6 @@
 package fhg.tooling.semver.cli.subcommands;
 
-import com.vdurmont.semver4j.Semver;
+import io.github.freiheitstools.semver.parser.api.SemVerBuilder;
 import picocli.CommandLine.Command;
 
 import java.util.concurrent.Callable;
@@ -12,7 +12,7 @@ public class NextMajorSubcommand extends BumpingSubcommand
         implements Callable<Integer> {
 
     @Override
-    Function<Semver, Semver> getBumpingFunction() {
-        return Semver::nextMajor;
+    Function<SemVerBuilder, SemVerBuilder> getBumpingFunction() {
+        return SemVerBuilder::nextMajor;
     }
 }

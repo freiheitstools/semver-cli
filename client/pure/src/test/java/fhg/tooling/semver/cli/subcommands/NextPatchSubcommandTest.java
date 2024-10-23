@@ -6,7 +6,6 @@ import picocli.CommandLine;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
