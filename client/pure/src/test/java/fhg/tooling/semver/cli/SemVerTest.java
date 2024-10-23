@@ -1,5 +1,6 @@
 package fhg.tooling.semver.cli;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import picocli.CommandLine;
@@ -10,6 +11,11 @@ import java.io.PrintStream;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class SemVerTest {
+    @BeforeEach
+    void disableAnsi() {
+        System.setProperty("picocli.ansi", "false");
+    }
+
     @Nested
     class HelpAndVersion {
         @Test
