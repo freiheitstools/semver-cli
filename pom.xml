@@ -17,9 +17,9 @@
 
   <properties>
     <os.family>will_be_changed_by_profiles_and_their_activation</os.family>
-    <picocli.version>4.6.1</picocli.version>
-    <assertj-core.version>3.21.0</assertj-core.version>
-    <junit.version>5.8.1</junit.version>
+    <svc.picocli.version>4.6.1</svc.picocli.version>
+    <svc.assertj-core.version>3.21.0</svc.assertj-core.version>
+    <svc.junit.version>5.8.1</svc.junit.version>
 
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -27,8 +27,13 @@
 
     <!-- Controls the build of a native image of the tool -->
     <skipNativeBuild>false</skipNativeBuild>
-    <semverparser.version>0.1.0</semverparser.version>
-    <commons-lang3.version>3.8.1</commons-lang3.version>
+    <svc.semverparser.version>0.1.0</svc.semverparser.version>
+    <svc.commons-lang3.version>3.8.1</svc.commons-lang3.version>
+    <svc.maven-compiler-plugin.version>3.8.1</svc.maven-compiler-plugin.version>
+    <svc.maven-surefire-plugin.version>3.0.0-M4</svc.maven-surefire-plugin.version>
+    <svc.maven-jar-plugin.version>3.2.0</svc.maven-jar-plugin.version>
+    <svc.native-image-maven-plugin.version>21.2.0</svc.native-image-maven-plugin.version>
+    <svc.maven-assembly-plugin.version>3.3.0</svc.maven-assembly-plugin.version>
   </properties>
 
   <modules>
@@ -40,30 +45,30 @@
       <dependency>
         <groupId>io.github.freiheitstools.semver.parser</groupId>
         <artifactId>parser</artifactId>
-        <version>${semverparser.version}</version>
+        <version>${svc.semverparser.version}</version>
       </dependency>
       <dependency>
         <groupId>info.picocli</groupId>
         <artifactId>picocli</artifactId>
-        <version>${picocli.version}</version>
+        <version>${svc.picocli.version}</version>
       </dependency>
       <dependency>
         <groupId>org.assertj</groupId>
         <artifactId>assertj-core</artifactId>
-        <version>${assertj-core.version}</version>
+        <version>${svc.assertj-core.version}</version>
         <scope>test</scope>
       </dependency>
       <dependency>
         <groupId>org.junit</groupId>
         <artifactId>junit-bom</artifactId>
-        <version>${junit.version}</version>
+        <version>${svc.junit.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
       <dependency>
         <groupId>org.apache.commons</groupId>
         <artifactId>commons-lang3</artifactId>
-        <version>${commons-lang3.version}</version>
+        <version>${svc.commons-lang3.version}</version>
       </dependency>
 
     </dependencies>
@@ -114,13 +119,13 @@
       <plugins>
         <plugin>
           <artifactId>maven-surefire-plugin</artifactId>
-          <version>3.0.0-M4</version>
+          <version>${svc.maven-surefire-plugin.version}</version>
         </plugin>
 
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-jar-plugin</artifactId>
-          <version>3.2.0</version>
+          <version>${svc.maven-jar-plugin.version}</version>
           <configuration>
             <skipIfEmpty>true</skipIfEmpty>
           </configuration>
@@ -129,7 +134,7 @@
         <plugin>
           <groupId>org.graalvm.nativeimage</groupId>
           <artifactId>native-image-maven-plugin</artifactId>
-          <version>21.2.0</version>
+          <version>${svc.native-image-maven-plugin.version}</version>
           <executions>
             <execution>
               <goals>
@@ -148,13 +153,13 @@
 
         <plugin>
           <artifactId>maven-assembly-plugin</artifactId>
-          <version>3.3.0</version>
+          <version>${svc.maven-assembly-plugin.version}</version>
         </plugin>
 
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-compiler-plugin</artifactId>
-          <version>3.8.1</version>
+          <version>${svc.maven-compiler-plugin.version}</version>
           <configuration>
             <encoding>UTF-8</encoding>
             <source>${svc.java-language-level}</source>
@@ -165,7 +170,7 @@
               <path>
                 <groupId>info.picocli</groupId>
                 <artifactId>picocli-codegen</artifactId>
-                <version>${picocli.version}</version>
+                <version>${svc.picocli.version}</version>
               </path>
             </annotationProcessorPaths>
             <compilerArgs>
