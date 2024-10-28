@@ -75,14 +75,14 @@ jobs:
           echo "native_filename=${NATIVE_FILENAME}" >> ${GITHUB_OUTPUT}
 
       - name: Upload native binary
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: ${{ steps.show-result.outputs.native_filename }}
           path: client/pure/target/${{ steps.show-result.outputs.native_filename }}
           if-no-files-found: error
 
       - name: Upload ueberjar
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: ${{ steps.show-result.outputs.ueberjar_filename }}
           path: client/pure/target/${{ steps.show-result.outputs.ueberjar_filename }}
