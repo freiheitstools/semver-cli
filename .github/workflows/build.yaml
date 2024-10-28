@@ -1,10 +1,8 @@
-name: XXX Build
+name: Build and test
 
 on:
   workflow_dispatch:
   push:
-
-
 
 jobs:
   build:
@@ -12,7 +10,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [macos-latest, ubuntu-latest]
-        jdk: [ 17 ]
+        jdk: [ 22, 23 ]
 
     runs-on: ${{ matrix.os }}
     steps:
@@ -20,21 +18,16 @@ jobs:
         id: git-checkout
         uses: actions/checkout@v2
         
-      - name: Setup GraalVM Community Edition
-        id: setup-graalvm
-        uses: graalvm/setup-graalvm@v1
+      - uses: actions/setup-java@v4
         with:
-          version: 'latest'
-          java-version: '17'
-          components: 'native-image'
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          distribution: 'graalvm'
+          java-version: '${{ matrix.jdk }}'
 
       - name: Show Versions of used tools
         run: |
           echo "GRAALVM_HOME: $GRAALVM_HOME"
           echo "JAVA_HOME: $JAVA_HOME"
-          echo "Version of java:" $(java --version)
-          echo "Version of gu:" $(gu --version)
+          echo "Version of Java:" $(java --version)
           echo "Version of native-image:" $(native-image --version)
           echo "Version of Apache Maven:" $(mvn --version)
 

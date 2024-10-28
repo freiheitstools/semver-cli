@@ -23,6 +23,7 @@
 
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <svc.java-language-level>22</svc.java-language-level>
 
     <!-- Controls the build of a native image of the tool -->
     <skipNativeBuild>false</skipNativeBuild>
@@ -156,10 +157,10 @@
           <version>3.8.1</version>
           <configuration>
             <encoding>UTF-8</encoding>
-            <source>11</source>
-            <target>11</target>
-            <testSource>11</testSource>
-            <testTarget>11</testTarget>
+            <source>${svc.java-language-level}</source>
+            <target>${svc.java-language-level}</target>
+            <testSource>${svc.java-language-level}</testSource>
+            <testTarget>${svc.java-language-level}</testTarget>
             <annotationProcessorPaths>
               <path>
                 <groupId>info.picocli</groupId>

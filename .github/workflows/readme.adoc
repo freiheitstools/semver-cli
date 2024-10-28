@@ -1,7 +1,3 @@
-= Notes on the used Github Actions
+= Notes on the used GitHub Actions
 
-== Used Actions
-
-List of used Github Action and their homepage.
-
-- https://github.com/marketplace/actions/github-action-for-graalvm[Github Action to setup GraalVM^]
+No specific notes needed.
