@@ -5,7 +5,6 @@ import java.util.concurrent.Callable;
 import fhg.tooling.semver.cli.ExitCodes;
 import io.github.freiheitstools.semver.parser.api.SemVer;
 import org.apache.commons.lang3.StringUtils;
-import picocli.CommandLine;
 import picocli.CommandLine.ArgGroup;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Mixin;

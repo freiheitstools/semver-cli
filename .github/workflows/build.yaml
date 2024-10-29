@@ -74,12 +74,13 @@ jobs:
       - name: Display Build Results
         id: show-result
         run: |
-          ls -lha client/pure/target/
+          ls -lha client/target/
             
-          UEBERJAR_FILENAME=$( basename $( ls client/pure/target/semver*.jar ))
+          UEBERJAR_FILENAME=$( basename $( ls client/target/semver*.jar ))
           echo "ueberjar_filename=${UEBERJAR_FILENAME}" >> ${GITHUB_OUTPUT}
 
-          NATIVE_FILENAME=$( basename $( ls client/pure/target/semver*.bin ))
+          NATIVE_FILENAME=$( basename $( ls client/target/semver*.bin ))
+          NATIVE_FILENAME=$( basename $( ls client/target/semver*.bin ))
           echo "native_filename=${NATIVE_FILENAME}" >> ${GITHUB_OUTPUT}
 
       - name: Upload native binary
@@ -89,7 +90,7 @@ jobs:
         if: matrix.jdk == env.REFERENCE_JDK_VERSION
         with:
           name: ${{ steps.show-result.outputs.native_filename }}
-          path: client/pure/target/${{ steps.show-result.outputs.native_filename }}
+          path: client/target/${{ steps.show-result.outputs.native_filename }}
           if-no-files-found: error
 
       - name: Upload ueberjar
@@ -99,5 +100,5 @@ jobs:
         if: matrix.jdk == env.REFERENCE_JDK_VERSION && matrix.os == env.REFERENCE_OS_NAME
         with:
           name: ${{ steps.show-result.outputs.ueberjar_filename }}
-          path: client/pure/target/${{ steps.show-result.outputs.ueberjar_filename }}
+          path: client/target/${{ steps.show-result.outputs.ueberjar_filename }}
           if-no-files-found: error
