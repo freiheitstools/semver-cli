@@ -18,7 +18,7 @@
   <properties>
     <os.family>will_be_changed_by_profiles_and_their_activation</os.family>
     <svc.picocli.version>4.7.6</svc.picocli.version>
-    <svc.assertj-core.version>3.26.3</svc.assertj-core.version>
+    <svc.assertj-core.version>3.27.1</svc.assertj-core.version>
     <svc.junit.version>5.11.4</svc.junit.version>
 
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
