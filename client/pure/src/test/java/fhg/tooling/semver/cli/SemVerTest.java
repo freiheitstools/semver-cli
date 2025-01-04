@@ -40,12 +40,14 @@ class SemVerTest {
             expectedOutput.append("  -h, --help      Show this help message and exit.\n");
             expectedOutput.append("  -V, --version   Print version information and exit.\n");
             expectedOutput.append("Commands:\n");
-            expectedOutput.append("  extract    Allows to extract single parts from a version number\n");
-            expectedOutput.append("  nextmajor  Return the next major version for a given version\n");
-            expectedOutput.append("  nextminor  Return the next minor version for a given version\n");
-            expectedOutput.append("  nextpatch  Return the next patch version for a given version\n");
-            expectedOutput.append("  strip      Returns the version without suffix and build number\n");
-            expectedOutput.append("  validate   Validates a given version\n");
+            expectedOutput.append("  extract          Allows to extract single parts from a version number\n");
+            expectedOutput.append("  ismavensnapshot  Checks if the given semantic version is a Maven snapshot\n");
+            expectedOutput.append("                     version or not\n");
+            expectedOutput.append("  nextmajor        Return the next major version for a given version\n");
+            expectedOutput.append("  nextminor        Return the next minor version for a given version\n");
+            expectedOutput.append("  nextpatch        Return the next patch version for a given version\n");
+            expectedOutput.append("  strip            Returns the version without suffix and build number\n");
+            expectedOutput.append("  validate         Validates a given version\n");
 
             assertThat(outputStreamCaptor.toString()).isEqualTo(expectedOutput.toString());
             assertThat(exitCode).isEqualTo(0);

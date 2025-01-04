@@ -15,6 +15,7 @@ import java.util.jar.Manifest;
         name = "semver",
         subcommands = {
                 ExtractSubcommand.class,
+                IsMavenSnapshotSubCommand.class,
                 NextMajorSubcommand.class, NextMinorSubcommand.class,
                 NextPatchSubcommand.class, StripSubcommand.class,
                 ValidateSubcommand.class},
