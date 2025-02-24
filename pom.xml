@@ -29,7 +29,7 @@
     <skipNativeBuild>false</skipNativeBuild>
     <svc.semverparser.version>1.0.0</svc.semverparser.version>
     <svc.commons-lang3.version>3.17.0</svc.commons-lang3.version>
-    <svc.maven-compiler-plugin.version>3.13.0</svc.maven-compiler-plugin.version>
+    <svc.maven-compiler-plugin.version>3.14.0</svc.maven-compiler-plugin.version>
     <svc.maven-surefire-plugin.version>3.5.2</svc.maven-surefire-plugin.version>
     <svc.maven-jar-plugin.version>3.4.2</svc.maven-jar-plugin.version>
     <svc.native-image-maven-plugin.version>21.2.0</svc.native-image-maven-plugin.version>
