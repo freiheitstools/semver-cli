@@ -15,6 +15,12 @@
     </license>
   </licenses>
 
+  <scm>
+    <connection>scm:git:git://github.com/freiheitstools/semver-cli.git</connection>
+    <developerConnection>scm:git:ssh://github.com:freiheitstools/semver-cli.git</developerConnection>
+    <url>https://github.com/freiheitstools/semver-cli</url>
+  </scm>
+
   <properties>
     <os.family>will_be_changed_by_profiles_and_their_activation</os.family>
     <svc.picocli.version>4.7.7</svc.picocli.version>
