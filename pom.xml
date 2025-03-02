@@ -33,10 +33,14 @@
 
     <!-- Controls the build of a native image of the tool -->
     <skipNativeBuild>false</skipNativeBuild>
+    <svc.maven-minimal-version>3.9.0</svc.maven-minimal-version>
     <svc.semverparser.version>1.0.0</svc.semverparser.version>
     <svc.commons-lang3.version>3.17.0</svc.commons-lang3.version>
     <svc.maven-compiler-plugin.version>3.14.0</svc.maven-compiler-plugin.version>
+    <svc.maven-enforcer-plugin.version>3.4.1</svc.maven-enforcer-plugin.version>
     <svc.maven-surefire-plugin.version>3.5.3</svc.maven-surefire-plugin.version>
+    <svc.semverparser.version>0.1.0</svc.semverparser.version>
+    <svc.commons-lang3.version>3.8.1</svc.commons-lang3.version>
     <svc.maven-jar-plugin.version>3.4.2</svc.maven-jar-plugin.version>
     <svc.native-image-maven-plugin.version>21.2.0</svc.native-image-maven-plugin.version>
     <svc.maven-assembly-plugin.version>3.7.1</svc.maven-assembly-plugin.version>
@@ -183,6 +187,31 @@
               <arg>-Aproject=${project.groupId}/${project.artifactId}</arg>
             </compilerArgs>
           </configuration>
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-enforcer-plugin</artifactId>
+          <version>${svc.maven-enforcer-plugin.version}</version>
+          <executions>
+            <execution>
+              <id>enforce-maven</id>
+              <goals>
+                <goal>enforce</goal>
+              </goals>
+              <configuration>
+                <rules>
+                  <requireMavenVersion>
+                    <version>[${svc.maven-minimal-version},)</version>
+                  </requireMavenVersion>
+                  <requireJavaVersion>
+                    <version>[${svc.java-language-level},)</version>
+                  </requireJavaVersion>
+                  <dependencyConvergence/>
+                </rules>
+              </configuration>
+            </execution>
+          </executions>
         </plugin>
       </plugins>
     </pluginManagement>
