@@ -37,7 +37,7 @@
     <svc.semverparser.version>1.0.0</svc.semverparser.version>
     <svc.commons-lang3.version>3.17.0</svc.commons-lang3.version>
     <svc.maven-compiler-plugin.version>3.14.0</svc.maven-compiler-plugin.version>
-    <svc.maven-enforcer-plugin.version>3.4.1</svc.maven-enforcer-plugin.version>
+    <svc.maven-enforcer-plugin.version>3.5.0</svc.maven-enforcer-plugin.version>
     <svc.maven-surefire-plugin.version>3.5.3</svc.maven-surefire-plugin.version>
     <svc.semverparser.version>0.1.0</svc.semverparser.version>
     <svc.commons-lang3.version>3.8.1</svc.commons-lang3.version>
