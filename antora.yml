@@ -9,21 +9,13 @@ asciidoc:
 nav:
   - modules/ROOT/nav.adoc
 
-### todo ext:
-### todo   collector:
-### todo     run:
-### todo       - command: mvn --log-file dependencies-update-1.log --no-transfer-progress versions:display-dependency-updates
-### todo         dir: modules/ROOT/examples/dependencies-update-1
-### todo       - command: cp pom.xml pom.xml.original
-### todo         dir: modules/ROOT/examples/dependencies-update-1
-### todo       - command: mvn --log-file dependencies-update-2.log --no-transfer-progress versions:update-properties
-### todo         dir: modules/ROOT/examples/dependencies-update-1
-### todo       - command: cp pom.xml pom.xml.updated
-### todo         dir: modules/ROOT/examples/dependencies-update-1
-### todo       - command: cp pom.xml.original pom.xml
-### todo         dir: modules/ROOT/examples/dependencies-update-1
-### todo     scan:
-### todo       dir: modules/ROOT/examples/dependencies-update-1
-### todo       files: '**/*.log'
-### todo       into: modules/ROOT/examples
-### todo
+ext:
+  collector:
+    run:
+      - command: modules/ROOT/bin/run-generation-of-examples.sh
+      - command: modules/ROOT/bin/run-generation-of-synopsis-files.sh
+    scan:
+      dir: modules/ROOT/generated-files
+      files: '**/*.incl'
+      into: modules/ROOT/examples
+

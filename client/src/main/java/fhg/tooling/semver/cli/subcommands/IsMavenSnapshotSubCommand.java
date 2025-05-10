@@ -16,6 +16,7 @@ import static picocli.CommandLine.*;
  */
 @Command(name = "ismavensnapshot",
         description = "Checks if the given semantic version is a Maven snapshot version or not",
+        mixinStandardHelpOptions = true,
         exitCodeList = {
                 ExitCodes.SUCCESS + ": Given semantic version is a Maven snapshot version",
                 ExitCodes.NEGATIVE_EXECUTION_RESULT + ": Given semantic version isn't a Maven snapshot version",

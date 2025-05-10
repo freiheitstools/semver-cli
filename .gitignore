@@ -13,3 +13,4 @@ target
 /.mvn
 build
 node_modules
+modules/ROOT/generated-files

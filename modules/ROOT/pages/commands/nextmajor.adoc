@@ -1,1 +1,14 @@
 = The `nextmajor` Subcommand
+
+== Synopsis
+----
+include::example$gen-synopsis-nextmajor.incl[]
+----
+
+== Description
+
+== Examples
+
+----
+include::example$gen-example-get-next-major-version.incl[]
+----

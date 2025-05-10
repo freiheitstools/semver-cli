@@ -7,6 +7,7 @@ import java.util.concurrent.Callable;
 import java.util.function.Function;
 
 @Command(name = "nextpatch",
+         mixinStandardHelpOptions = true,
          description = "Return the next patch version for a given version")
 public class NextPatchSubcommand extends BumpingSubcommand
         implements Callable<Integer> {

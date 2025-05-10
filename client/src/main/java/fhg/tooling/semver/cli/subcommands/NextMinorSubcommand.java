@@ -7,6 +7,7 @@ import java.util.concurrent.Callable;
 import java.util.function.Function;
 
 @Command(name = "nextminor",
+         mixinStandardHelpOptions = true,
          description = "Return the next minor version for a given version")
 public class NextMinorSubcommand extends BumpingSubcommand
         implements Callable<Integer> {
