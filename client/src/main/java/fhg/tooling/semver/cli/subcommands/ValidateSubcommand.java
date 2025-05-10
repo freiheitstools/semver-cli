@@ -11,9 +11,11 @@ import java.util.concurrent.Callable;
 import static picocli.CommandLine.*;
 
 @Command(name = "validate",
-         mixinStandardHelpOptions = true,
          description = "Validates a given version")
 public class ValidateSubcommand implements Callable<Integer> {
+    @CommandLine.Option(names = {"-h", "--help"}, usageHelp = true, description = "display this help message")
+    boolean usageHelpRequested;
+
     @Mixin
     private VersionParameter versionParameter = new VersionParameter();
 

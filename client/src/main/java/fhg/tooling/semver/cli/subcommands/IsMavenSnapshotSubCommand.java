@@ -4,6 +4,7 @@ import fhg.tooling.semver.cli.ExitCodes;
 import io.github.freiheitstools.semver.parser.api.SemVer;
 import picocli.CommandLine;
 import picocli.CommandLine.Mixin;
+import picocli.CommandLine.Option;
 
 import java.util.Objects;
 import java.util.Optional;
@@ -16,7 +17,6 @@ import static picocli.CommandLine.*;
  */
 @Command(name = "ismavensnapshot",
         description = "Checks if the given semantic version is a Maven snapshot version or not",
-        mixinStandardHelpOptions = true,
         exitCodeList = {
                 ExitCodes.SUCCESS + ": Given semantic version is a Maven snapshot version",
                 ExitCodes.NEGATIVE_EXECUTION_RESULT + ": Given semantic version isn't a Maven snapshot version",
@@ -25,6 +25,9 @@ import static picocli.CommandLine.*;
 )
 public class IsMavenSnapshotSubCommand
         implements Callable<Integer> {
+
+    @Option(names = {"-h", "--help"}, usageHelp = true, description = "display this help message")
+    boolean usageHelpRequested;
 
     /**
      * Textual representation of the suffix {@code SNAPSHOT} used by

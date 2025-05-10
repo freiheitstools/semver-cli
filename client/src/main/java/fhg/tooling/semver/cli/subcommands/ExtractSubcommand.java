@@ -15,7 +15,6 @@ import picocli.CommandLine.Option;
  * of a given version number.
  */
 @Command(name = "extract",
-        mixinStandardHelpOptions = true,
         description = "Allows to extract single parts from a version number")
 public class ExtractSubcommand
         implements Callable<Integer> {
