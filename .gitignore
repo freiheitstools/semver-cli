@@ -11,3 +11,5 @@ pom.xml.releaseBackup
 *.ignore.sh
 target
 /.mvn
+build
+node_modules

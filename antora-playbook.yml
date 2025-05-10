@@ -1,0 +1,22 @@
+site:
+  title: SemVer Commandline Client
+  start_page: cli::index.adoc
+
+content:
+  sources:
+    - url: .
+      branches: HEAD
+      start_paths: [ ./ ]
+
+ui:
+  bundle:
+    url: https://github.com/obfischer/antora-ui-obfischer/releases/download/2025-04-12/ui-bundle.zip
+    snapshot: true
+
+antora:
+  extensions:
+    - '@antora/collector-extension'
+
+asciidoc:
+  extensions:
+    - asciidoctor-kroki
