@@ -1,2 +1,9 @@
 = Commands
 
+* xref:commands/extract.adoc[extract - Extract parts from a version]
+* xref:commands/ismavensnapshot.adoc[ismavensnapshot - Check if a version represents a Maven snapshot version]
+* xref:commands/nextmajor.adoc[nextmajor - Bump a given version to the next major version]
+* xref:commands/nextminor.adoc[nextminor - Bump a given version to the next minor version]
+* xref:commands/nextpatch.adoc[nextpatch - Bump a given version to the next patch version]
+* xref:commands/strip.adoc[strip - Remove optional parts from a given version]
+* xref:commands/validate.adoc[validate - Check if a given version is a semantic version]
