@@ -9,10 +9,12 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.concurrent.Callable;
 
+import static picocli.CommandLine.*;
+
 /**
  * Subcommand to check if a given semantic version represents a valid Maven snapshot version or not.
  */
-@CommandLine.Command(name = "ismavensnapshot",
+@Command(name = "ismavensnapshot",
         description = "Checks if the given semantic version is a Maven snapshot version or not",
         exitCodeList = {
                 ExitCodes.SUCCESS + ": Given semantic version is a Maven snapshot version",
@@ -28,6 +30,9 @@ public class IsMavenSnapshotSubCommand
      * Apache Maven to mark a given version as snapshot version.
      */
     private static final String SNAPSHOT = "SNAPSHOT";
+
+    @Option(names = {"-h", "--help"}, usageHelp = true, description = "display this help message")
+    boolean usageHelpRequested;
 
     @Mixin
     private VersionParameter versionParameter = new VersionParameter();

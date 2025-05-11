@@ -21,6 +21,9 @@ public class ExtractSubcommand
 
     private VersionPrinter printer = new VersionPrinter();
 
+    @Option(names = {"-h", "--help"}, usageHelp = true, description = "display this help message")
+    boolean usageHelpRequested;
+
     @Mixin
     private OutputOptions outputOptions = new OutputOptions();
 
