@@ -2,14 +2,20 @@ package fhg.tooling.semver.cli.subcommands;
 
 import fhg.tooling.semver.cli.ExitCodes;
 import io.github.freiheitstools.semver.parser.api.SemVer;
+import picocli.CommandLine;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Mixin;
 
 import java.util.concurrent.Callable;
 
+import static picocli.CommandLine.*;
+
 @Command(name = "strip",
         description = "Returns the version without suffix and build number")
 public class StripSubcommand implements Callable<Integer> {
+    @Option(names = {"-h", "--help"}, usageHelp = true, description = "display this help message")
+    boolean usageHelpRequested;
+
     @Mixin
     private VersionParameter versionParameter = new VersionParameter();
 

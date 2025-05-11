@@ -5,6 +5,8 @@ import org.assertj.core.api.Assertions;
 import org.assertj.core.api.InstanceOfAssertFactories;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import picocli.CommandLine;
 
 import java.io.ByteArrayOutputStream;
@@ -40,6 +42,19 @@ class IsMavenSnapshotSubCommandTest {
             assertThat(parseResult.hasMatchedPositional(0)).isTrue();
             assertThat(parseResult.matchedPositional(0).<String>getValue()).isEqualTo("4.5.6-SNAPSHOT");
         }
+
+        @ParameterizedTest
+        @ValueSource(strings = {"-h", "--help"})
+        void callWithHelpOptionIsPossible(String option) {
+            IsMavenSnapshotSubCommand command = new IsMavenSnapshotSubCommand();
+            CommandLine cmdline = new CommandLine(command);
+
+            CommandLine.ParseResult parseResult = cmdline.parseArgs(option);
+
+            assertThat(parseResult.matchedOptions()).hasSize(1);
+            assertThat(parseResult.matchedOption(option).isOption()).isTrue();
+        }
+
     }
 
     @Nested

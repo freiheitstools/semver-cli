@@ -108,6 +108,19 @@ class ExtractSubcommandTest {
             assertThat(parseResult.matchedOptions()).hasSize(2);
             assertThat(parseResult.matchedOption("-n")).isNotNull();
         }
+
+        @ParameterizedTest
+        @ValueSource(strings = {"-h", "--help"})
+        void callWithHelpOptionIsPossible(String option) {
+            ExtractSubcommand command = new ExtractSubcommand();
+            CommandLine cmdline = new CommandLine(command);
+
+            CommandLine.ParseResult parseResult = cmdline.parseArgs(option);
+
+            assertThat(parseResult.matchedOptions()).hasSize(1);
+            assertThat(parseResult.matchedOption(option).isOption()).isTrue();
+        }
+
     }
 
 

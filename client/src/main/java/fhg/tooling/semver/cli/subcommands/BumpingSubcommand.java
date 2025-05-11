@@ -10,6 +10,9 @@ import java.util.stream.Stream;
 import static picocli.CommandLine.*;
 
 abstract class BumpingSubcommand {
+    @Option(names = {"-h", "--help"}, usageHelp = true, description = "display this help message")
+    boolean usageHelpRequested;
+
     @Mixin
     private SuffixOptions suffixOptions = new SuffixOptions();
 
