@@ -4,9 +4,9 @@ To be written
 
 == Synopsis
 
-//----
-//include::example$gen-synopsis-extract.incl[]
-//----
+----
+include::example$gen-synopsis-validate.incl[]
+----
 
 == Description
 
