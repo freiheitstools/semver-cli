@@ -1,1 +1,41 @@
 = The `extract` Subcommand
+
+Extract a single segment of a given version.
+
+== Synopsis
+
+----
+include::example$gen-synopsis-extract.incl[]
+----
+
+== Description
+
+To be written
+
+-1, --major::: Extracts the major version
+-2, --minor::: Extracts the minor version
+-3, --patch::: Extracts the patch version
+-4, --prerelease::: Extracts the prerelease version if present
+-5, --build::: Extracts the build information if present
+
+include::partial$option-help.adoc[]
+include::partial$option-no-newline.adoc[]
+include::partial$option-failsafe.adoc[]
+
+
+== Examples
+
+.Extract the build information of a version
+----
+include::example$gen-example-extract-build.incl[]
+----
+
+.Extract the major version of a version
+----
+include::example$gen-example-extract-major.incl[]
+----
+
+.Extract the pre-release version of a version
+----
+include::example$gen-example-extract-prerelease.incl[]
+----

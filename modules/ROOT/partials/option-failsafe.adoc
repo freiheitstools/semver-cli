@@ -1,0 +1,1 @@
+-s, --fail-safe::: Don't fail if the requested segment of the version information does not exist

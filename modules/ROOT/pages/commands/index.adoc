@@ -1,6 +1,6 @@
 = Commands
 
-* xref:commands/extract.adoc[extract - Extract parts from a version]
+* xref:commands/extract.adoc[extract - Extract a single segment of a version]
 * xref:commands/ismavensnapshot.adoc[ismavensnapshot - Check if a version represents a Maven snapshot version]
 * xref:commands/nextmajor.adoc[nextmajor - Bump a given version to the next major version]
 * xref:commands/nextminor.adoc[nextminor - Bump a given version to the next minor version]

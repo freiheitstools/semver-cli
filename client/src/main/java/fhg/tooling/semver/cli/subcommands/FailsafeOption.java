@@ -15,8 +15,8 @@ public class FailsafeOption {
     }
 
     @Option(names = {"-s", "--fail-safe"}, required = false,
-            description = "Don't fail if requested segment of the version information "
-                        + "does not exist")
+            description = "Don't fail if the requested segment of the version "
+                        + "information does not exist")
     public void setFailsafe(boolean failsafe) {
         this.failsafe = failsafe;
     }

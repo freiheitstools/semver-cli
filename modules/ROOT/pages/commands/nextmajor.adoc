@@ -1,11 +1,18 @@
 = The `nextmajor` Subcommand
 
 == Synopsis
+
 ----
 include::example$gen-synopsis-nextmajor.incl[]
 ----
 
 == Description
+
+To be written
+
+include::partial$option-help.adoc[]
+include::partial$option-no-newline.adoc[]
+
 
 == Examples
 

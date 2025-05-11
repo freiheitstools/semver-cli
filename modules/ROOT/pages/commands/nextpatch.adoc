@@ -1,1 +1,24 @@
 = The `nextpatch` Subcommand
+
+To be written
+
+== Synopsis
+
+//----
+//include::example$gen-synopsis-extract.incl[]
+//----
+
+== Description
+
+To be written
+
+include::partial$option-help.adoc[]
+include::partial$option-no-newline.adoc[]
+
+
+== Examples
+
+//----
+//include::example$gen-example-get-next-major-version.incl[]
+//----
+

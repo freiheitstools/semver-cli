@@ -1,0 +1,1 @@
+-n, --no-newline::: Print no newline after the version
