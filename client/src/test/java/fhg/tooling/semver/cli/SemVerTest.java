@@ -34,22 +34,24 @@ class SemVerTest {
                 System.setOut(stdoutStream);
             }
 
-            StringBuffer expectedOutput = new StringBuffer();
+            String expectedOutput =
+                    """
+                    Usage: semver [-hV] [COMMAND]
+                      -h, --help      Show this help message and exit.
+                      -V, --version   Print version information and exit.
+                    Commands:
+                      extract          Extract single segment from a version identifier
+                      ismavensnapshot  Check if the given semantic version is a Maven snapshot
+                                         version or not
+                      nextmajor        Return the next major version for a given version
+                      nextminor        Return the next minor version for a given version
+                      nextpatch        Return the next patch version for a given version
+                      strip            Return the version without prerelease identifier and build
+                                         number
+                      validate         Validate a given version
+                    """;
 
-            expectedOutput.append("Usage: semver [-hV] [COMMAND]\n");
-            expectedOutput.append("  -h, --help      Show this help message and exit.\n");
-            expectedOutput.append("  -V, --version   Print version information and exit.\n");
-            expectedOutput.append("Commands:\n");
-            expectedOutput.append("  extract          Allows to extract single parts from a version number\n");
-            expectedOutput.append("  ismavensnapshot  Checks if the given semantic version is a Maven snapshot\n");
-            expectedOutput.append("                     version or not\n");
-            expectedOutput.append("  nextmajor        Return the next major version for a given version\n");
-            expectedOutput.append("  nextminor        Return the next minor version for a given version\n");
-            expectedOutput.append("  nextpatch        Return the next patch version for a given version\n");
-            expectedOutput.append("  strip            Returns the version without suffix and build number\n");
-            expectedOutput.append("  validate         Validates a given version\n");
-
-            assertThat(outputStreamCaptor.toString()).isEqualTo(expectedOutput.toString());
+            assertThat(outputStreamCaptor.toString()).isEqualTo(expectedOutput);
             assertThat(exitCode).isEqualTo(0);
         }
     }

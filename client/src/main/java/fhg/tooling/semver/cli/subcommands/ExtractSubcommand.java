@@ -15,13 +15,21 @@ import picocli.CommandLine.Option;
  * of a given version number.
  */
 @Command(name = "extract",
-        description = "Allows to extract single parts from a version number")
+        description = "Extract single segment from a version identifier",
+        exitCodeListHeading = "Exit Codes:%n",
+        exitCodeList = {
+                "" + ExitCodes.SUCCESS + ": Segment found and extracted",
+                PreformattedExitCodeDocumentationStrings.EXIT_CODE_DOC_NEGATIVE_EXECUTION_RESULT,
+                PreformattedExitCodeDocumentationStrings.EXIT_CODE_DOC_INVALID_OPTIONS_PROVIDED,
+                PreformattedExitCodeDocumentationStrings.EXIT_CODE_DOC_INVALID_VERSION_IDENTIFIER,
+                PreformattedExitCodeDocumentationStrings.EXIT_CODE_DOC_MISSING_SEGMENT_RESULT
+        })
 public class ExtractSubcommand
         implements Callable<Integer> {
 
     private VersionPrinter printer = new VersionPrinter();
 
-    @Option(names = {"-h", "--help"}, usageHelp = true, description = "display this help message")
+    @Option(names = {"-h", "--help"}, usageHelp = true, description = "Display this help message")
     boolean usageHelpRequested;
 
     @Mixin

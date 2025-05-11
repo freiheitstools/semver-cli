@@ -11,7 +11,15 @@ import java.util.concurrent.Callable;
 import static picocli.CommandLine.*;
 
 @Command(name = "strip",
-        description = "Returns the version without suffix and build number")
+        description = "Return the version without prerelease identifier and build number",
+        exitCodeListHeading = "Exit Codes:%n",
+        exitCodeList = {
+                ExitCodes.SUCCESS + ": Successfully removed all optional segments",
+                PreformattedExitCodeDocumentationStrings.EXIT_CODE_DOC_NEGATIVE_EXECUTION_RESULT,
+                PreformattedExitCodeDocumentationStrings.EXIT_CODE_DOC_INVALID_OPTIONS_PROVIDED,
+                PreformattedExitCodeDocumentationStrings.EXIT_CODE_DOC_INVALID_VERSION_IDENTIFIER,
+        }
+)
 public class StripSubcommand implements Callable<Integer> {
     @Option(names = {"-h", "--help"}, usageHelp = true, description = "display this help message")
     boolean usageHelpRequested;
@@ -34,9 +42,9 @@ public class StripSubcommand implements Callable<Integer> {
         }
 
         SemVer stripped = SemVer.builder().startFrom(given)
-                                .removeBuild()
-                                .removePrerelease()
-                                .build();
+                .removeBuild()
+                .removePrerelease()
+                .build();
 
         printer.printVersion(outputOptions.noNewLine, stripped, System.out);
 

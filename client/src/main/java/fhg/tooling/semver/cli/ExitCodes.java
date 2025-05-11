@@ -10,12 +10,17 @@ public class ExitCodes {
     public static final int NEGATIVE_EXECUTION_RESULT = 1;
 
     /**
-     * At least one of the given version identifiers is not a valid semantic version identifier.
+     * Illegal commandline options or arguments specified.
+     */
+    public static final int INVALID_OPTIONS_PROVIDED = 2;
+
+    /**
+     * The given version identifier or identifiers is not a valid semantic version identifier.
      */
     public static final int INVALID_VERSION_IDENTIFIER = 10;
 
     /**
-     * The executed command requires a non-existing segment in the valie semantic version identifier
+     * The executed command requires a non-existing segment in the semantic version identifier
      * which is not present.
      */
     public static final int MISSING_SEGMENT = 20;

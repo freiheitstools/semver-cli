@@ -15,11 +15,14 @@ import static picocli.CommandLine.*;
  * Subcommand to check if a given semantic version represents a valid Maven snapshot version or not.
  */
 @Command(name = "ismavensnapshot",
-        description = "Checks if the given semantic version is a Maven snapshot version or not",
+        description = "Check if the given semantic version is a Maven snapshot version or not",
+        // Todo exit codes header
+        // todo Reuse Exit Codes
         exitCodeList = {
                 ExitCodes.SUCCESS + ": Given semantic version is a Maven snapshot version",
-                ExitCodes.NEGATIVE_EXECUTION_RESULT + ": Given semantic version isn't a Maven snapshot version",
-                ExitCodes.INVALID_VERSION_IDENTIFIER + ": Given version is not a valid semantic version"
+                PreformattedExitCodeDocumentationStrings.EXIT_CODE_DOC_NEGATIVE_EXECUTION_RESULT,
+                PreformattedExitCodeDocumentationStrings.EXIT_CODE_DOC_INVALID_OPTIONS_PROVIDED,
+                PreformattedExitCodeDocumentationStrings.EXIT_CODE_DOC_INVALID_VERSION_IDENTIFIER
         }
 )
 public class IsMavenSnapshotSubCommand
@@ -31,7 +34,7 @@ public class IsMavenSnapshotSubCommand
      */
     private static final String SNAPSHOT = "SNAPSHOT";
 
-    @Option(names = {"-h", "--help"}, usageHelp = true, description = "display this help message")
+    @Option(names = {"-h", "--help"}, usageHelp = true, description = "Display this help message")
     boolean usageHelpRequested;
 
     @Mixin
