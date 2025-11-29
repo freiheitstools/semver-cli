@@ -30,7 +30,7 @@ public class ExtractSubcommand
     @Mixin
     private FailsafeOption failsafeOption = new FailsafeOption();
 
-    @ArgGroup(exclusive = true, multiplicity = "1")
+    @ArgGroup(multiplicity = "1")
     Exclusive exclusive;
 
     @Mixin
