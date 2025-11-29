@@ -29,7 +29,7 @@
 
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <svc.java-language-level>22</svc.java-language-level>
+    <svc.java-language-level>25</svc.java-language-level>
 
     <!-- Controls the build of a native image of the tool -->
     <skipNativeBuild>false</skipNativeBuild>
