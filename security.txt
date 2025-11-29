@@ -1,0 +1,5 @@
+Contact: mailto:hello@oliverfischer.dev
+Contact: mailto:o.b.fischer@gmx.de
+Expires: 2028-03-20T23:00:00.000Z
+Preferred-Languages: en, de
+Canonical: https://github.com/freiheitstools/semver-cli/blob/future/security.txt
