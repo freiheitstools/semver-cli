@@ -2,8 +2,6 @@ package fhg.tooling.semver.cli.subcommands;
 
 import fhg.tooling.semver.cli.ExitCodes;
 import io.github.freiheitstools.semver.parser.api.SemVer;
-import picocli.CommandLine;
-import picocli.CommandLine.Mixin;
 
 import java.util.Objects;
 import java.util.Optional;
