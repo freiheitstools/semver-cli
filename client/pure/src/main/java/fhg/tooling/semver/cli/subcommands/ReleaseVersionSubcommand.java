@@ -15,6 +15,7 @@ public class ReleaseVersionSubcommand implements Callable<Integer> {
     @Mixin
     private VersionParameter versionParameter = new VersionParameter();
 
+    Wir müssen erst equal implementieren!!!!!
 
     public Integer call() throws Exception {
         try {
