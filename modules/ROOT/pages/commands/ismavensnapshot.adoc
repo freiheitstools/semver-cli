@@ -1,7 +1,5 @@
 = The `ismavensnapshot` Subcommand
 
-To be written
-
 == Synopsis
 
 ----
@@ -13,6 +11,10 @@ include::example$gen-synopsis-validate.incl[]
 To be written
 
 include::partial$option-help.adoc[]
+
+== Exit Codes
+
+tdw
 
 
 

@@ -1,20 +1,23 @@
 = The `nextpatch` Subcommand
 
-To be written
-
 == Synopsis
 
-//----
-//include::example$gen-synopsis-extract.incl[]
-//----
+----
+include::example$gen-synopsis-nextpatch.incl[]
+----
 
 == Description
 
 To be written
 
+include::partial$option-build.adoc[]
 include::partial$option-help.adoc[]
 include::partial$option-no-newline.adoc[]
 include::partial$option-suffix.adoc[]
+
+== Exit Codes
+
+tdw
 
 == Examples
 

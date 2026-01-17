@@ -10,12 +10,24 @@ include::example$gen-synopsis-nextmajor.incl[]
 
 To be written
 
+include::partial$option-build.adoc[]
 include::partial$option-help.adoc[]
 include::partial$option-no-newline.adoc[]
 include::partial$option-suffix.adoc[]
 
+== Exit Codes
+
+tdw
+
 == Examples
 
+.Generate the next major version based on a given semantic version
 ----
 include::example$gen-example-get-next-major-version.incl[]
 ----
+
+.Generate the next major version with a build identifier
+----
+include::example$gen-example-get-next-major-version-with-build.incl[]
+----
+

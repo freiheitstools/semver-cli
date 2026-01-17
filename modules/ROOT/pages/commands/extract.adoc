@@ -1,7 +1,5 @@
 = The `extract` Subcommand
 
-Extract a single segment of a given version.
-
 == Synopsis
 
 ----
@@ -10,7 +8,7 @@ include::example$gen-synopsis-extract.incl[]
 
 == Description
 
-To be written
+Extract a single segment of a given semantic version.
 
 -1, --major::: Extracts the major version
 -2, --minor::: Extracts the minor version
@@ -22,6 +20,9 @@ include::partial$option-help.adoc[]
 include::partial$option-no-newline.adoc[]
 include::partial$option-failsafe.adoc[]
 
+== Exit Codes
+
+tdw
 
 == Examples
 

@@ -1,7 +1,5 @@
 = The `nextminor` Subcommand
 
-To be written
-
 == Synopsis
 
 ----
@@ -12,9 +10,14 @@ include::example$gen-synopsis-nextminor.incl[]
 
 To be written
 
+include::partial$option-build.adoc[]
 include::partial$option-help.adoc[]
 include::partial$option-no-newline.adoc[]
 include::partial$option-suffix.adoc[]
+
+== Exit Codes
+
+tdw
 
 
 == Examples

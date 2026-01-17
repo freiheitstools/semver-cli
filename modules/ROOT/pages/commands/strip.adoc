@@ -1,12 +1,10 @@
 = The `strip` Subcommand
 
-To be written
-
 == Synopsis
 
-//----
-//include::example$gen-synopsis-extract.incl[]
-//----
+----
+include::example$gen-synopsis-strip.incl[]
+----
 
 == Description
 
@@ -15,6 +13,9 @@ To be written
 include::partial$option-help.adoc[]
 include::partial$option-no-newline.adoc[]
 
+== Exit Codes
+
+tdw
 
 == Examples
 
