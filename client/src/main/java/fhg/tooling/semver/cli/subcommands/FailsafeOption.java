@@ -1,6 +1,5 @@
 package fhg.tooling.semver.cli.subcommands;
 
-import picocli.CommandLine;
 import picocli.CommandLine.Option;
 
 public class FailsafeOption {
@@ -14,9 +13,9 @@ public class FailsafeOption {
         return !isFailsafe();
     }
 
-    @Option(names = {"-s", "--fail-safe"}, required = false,
-            description = "Don't fail if the requested segment of the version "
-                        + "information does not exist")
+    @Option(names = {"-s", "--fail-safe"},
+            description = "Don't fail if requested segment of the version information "
+                        + "does not exist")
     public void setFailsafe(boolean failsafe) {
         this.failsafe = failsafe;
     }

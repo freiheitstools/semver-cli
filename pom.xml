@@ -24,26 +24,26 @@
   <properties>
     <os.family>will_be_changed_by_profiles_and_their_activation</os.family>
     <svc.picocli.version>4.7.7</svc.picocli.version>
-    <svc.assertj-core.version>3.27.3</svc.assertj-core.version>
-    <svc.junit.version>5.12.2</svc.junit.version>
+    <svc.assertj-core.version>3.27.6</svc.assertj-core.version>
+    <svc.junit.version>6.0.2</svc.junit.version>
 
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <svc.java-language-level>22</svc.java-language-level>
+    <svc.java-language-level>25</svc.java-language-level>
 
     <!-- Controls the build of a native image of the tool -->
     <skipNativeBuild>false</skipNativeBuild>
     <svc.maven-minimal-version>3.9.0</svc.maven-minimal-version>
     <svc.semverparser.version>1.0.0</svc.semverparser.version>
-    <svc.commons-lang3.version>3.17.0</svc.commons-lang3.version>
-    <svc.maven-compiler-plugin.version>3.14.0</svc.maven-compiler-plugin.version>
-    <svc.maven-enforcer-plugin.version>3.5.0</svc.maven-enforcer-plugin.version>
-    <svc.maven-surefire-plugin.version>3.5.3</svc.maven-surefire-plugin.version>
+    <svc.commons-lang3.version>3.20.0</svc.commons-lang3.version>
+    <svc.maven-compiler-plugin.version>3.14.1</svc.maven-compiler-plugin.version>
+    <svc.maven-enforcer-plugin.version>3.6.2</svc.maven-enforcer-plugin.version>
+    <svc.maven-surefire-plugin.version>3.5.4</svc.maven-surefire-plugin.version>
     <svc.semverparser.version>1.0.0</svc.semverparser.version>
-    <svc.commons-lang3.version>3.17.0</svc.commons-lang3.version>
-    <svc.maven-jar-plugin.version>3.4.2</svc.maven-jar-plugin.version>
+    <svc.commons-lang3.version>3.20.0</svc.commons-lang3.version>
+    <svc.maven-jar-plugin.version>3.5.0</svc.maven-jar-plugin.version>
     <svc.native-image-maven-plugin.version>21.2.0</svc.native-image-maven-plugin.version>
-    <svc.maven-assembly-plugin.version>3.7.1</svc.maven-assembly-plugin.version>
+    <svc.maven-assembly-plugin.version>3.8.0</svc.maven-assembly-plugin.version>
   </properties>
 
   <modules>

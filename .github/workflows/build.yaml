@@ -10,7 +10,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [macos-latest, ubuntu-latest]
-        jdk: [ 22, 23, 24 ]
+        jdk: [ 25 ]
 
     runs-on: ${{ matrix.os }}
 
@@ -18,15 +18,15 @@ jobs:
       # The reference JDK and OS are needed to define which job of the matrix build is
       # allowed to upload the generated jar. Background: Uploading the same artifact multiple times
       # will cause all builds except the first one to fail
-      REFERENCE_JDK_VERSION: '22'
+      REFERENCE_JDK_VERSION: '25'
       REFERENCE_OS_NAME: 'macos-latest'
 
     steps:
       - name: Checkout Git Repository
         id: git-checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         
-      - uses: actions/setup-java@v4
+      - uses: actions/setup-java@v5
         with:
           distribution: 'graalvm'
           java-version: '${{ matrix.jdk }}'
@@ -59,7 +59,7 @@ jobs:
 
       - name: Setup local cached Maven Repository
         id: setup-cached-repo
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         env:
           cache-name: maven-local-repository-cache
         with:
@@ -84,7 +84,7 @@ jobs:
           echo "native_filename=${NATIVE_FILENAME}" >> ${GITHUB_OUTPUT}
 
       - name: Upload native binary
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         # The native binary can be only uploaded once for a plattform, therefore we have decided
         # to upload native binary only once for a given reference plattform
         if: matrix.jdk == env.REFERENCE_JDK_VERSION
@@ -94,7 +94,7 @@ jobs:
           if-no-files-found: error
 
       - name: Upload ueberjar
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         # The Ueberjar can be only uploaded once, therefore we have decided to upload
         # the artifact only once for a given reference plattform
         if: matrix.jdk == env.REFERENCE_JDK_VERSION && matrix.os == env.REFERENCE_OS_NAME

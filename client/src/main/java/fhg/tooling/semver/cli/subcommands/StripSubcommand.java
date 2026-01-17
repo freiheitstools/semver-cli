@@ -2,12 +2,10 @@ package fhg.tooling.semver.cli.subcommands;
 
 import fhg.tooling.semver.cli.ExitCodes;
 import io.github.freiheitstools.semver.parser.api.SemVer;
-import picocli.CommandLine;
-import picocli.CommandLine.Command;
-import picocli.CommandLine.Mixin;
-import picocli.CommandLine.Option;
 
 import java.util.concurrent.Callable;
+
+import static picocli.CommandLine.*;
 
 @Command(name = "strip",
         description = "Returns the version without suffix and build number")
