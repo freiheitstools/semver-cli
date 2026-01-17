@@ -14,7 +14,7 @@ To be written
 
 include::partial$option-help.adoc[]
 include::partial$option-no-newline.adoc[]
-
+include::partial$option-suffix.adoc[]
 
 == Examples
 

@@ -1,0 +1,1 @@
+-s, --suffix::: String to be used as pre-release identifier
