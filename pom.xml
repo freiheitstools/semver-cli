@@ -44,6 +44,10 @@
     <svc.maven-jar-plugin.version>3.5.0</svc.maven-jar-plugin.version>
     <svc.native-image-maven-plugin.version>21.2.0</svc.native-image-maven-plugin.version>
     <svc.maven-assembly-plugin.version>3.8.0</svc.maven-assembly-plugin.version>
+    <svc.pitest.version>1.22.0</svc.pitest.version>
+    <svn.pitest-junit.version>1.2.3</svn.pitest-junit.version>
+    <svc.pitest.skip>false</svc.pitest.skip>
+    <svc.pitest-target.coverage>79</svc.pitest-target.coverage>
   </properties>
 
   <modules>
@@ -85,6 +89,12 @@
   </dependencyManagement>
 
   <profiles>
+    <profile>
+      <id>no-pitest-execution</id>
+      <properties>
+        <svc.pitest.skip>true</svc.pitest.skip>
+      </properties>
+    </profile>
     <profile>
       <id>linux-build</id>
       <activation>
@@ -165,7 +175,31 @@
           <artifactId>maven-assembly-plugin</artifactId>
           <version>${svc.maven-assembly-plugin.version}</version>
         </plugin>
-
+        <plugin>
+          <groupId>org.pitest</groupId>
+          <artifactId>pitest-maven</artifactId>
+          <version>${svc.pitest.version}</version>
+          <configuration>
+            <coverageThreshold>${svc.pitest-target.coverage}</coverageThreshold>
+            <skip>${svc.pitest.skip}</skip>
+          </configuration>
+          <dependencies>
+            <dependency>
+              <groupId>org.pitest</groupId>
+              <artifactId>pitest-junit5-plugin</artifactId>
+              <version>${svn.pitest-junit.version}</version>
+            </dependency>
+          </dependencies>
+          <executions>
+            <execution>
+              <id>mutation-tests</id>
+              <phase>test</phase>
+              <goals>
+                <goal>mutationCoverage</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-compiler-plugin</artifactId>
