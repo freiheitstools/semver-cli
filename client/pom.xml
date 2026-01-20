@@ -30,6 +30,10 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+            <groupId>org.junit-pioneer</groupId>
+            <artifactId>junit-pioneer</artifactId>
+        </dependency>
+        <dependency>
             <groupId>io.github.freiheitstools.semver.parser</groupId>
             <artifactId>parser</artifactId>
         </dependency>

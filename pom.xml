@@ -25,6 +25,7 @@
     <os.family>will_be_changed_by_profiles_and_their_activation</os.family>
     <svc.picocli.version>4.7.7</svc.picocli.version>
     <svc.assertj-core.version>3.27.6</svc.assertj-core.version>
+    <svc.junit-pioneer.version>2.3.0</svc.junit-pioneer.version>
     <svc.junit.version>6.0.2</svc.junit.version>
 
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -56,6 +57,12 @@
 
   <dependencyManagement>
     <dependencies>
+      <dependency>
+        <groupId>org.junit-pioneer</groupId>
+        <artifactId>junit-pioneer</artifactId>
+        <version>${svc.junit-pioneer.version}</version>
+        <scope>test</scope>
+      </dependency>
       <dependency>
         <groupId>io.github.freiheitstools.semver.parser</groupId>
         <artifactId>parser</artifactId>
