@@ -32,7 +32,7 @@
     <svc.java-language-level>25</svc.java-language-level>
 
     <!-- Controls the build of a native image of the tool -->
-    <skipNativeBuild>false</skipNativeBuild>
+    <svc.native-build.skip>false</svc.native-build.skip>
     <svc.maven-minimal-version>3.9.0</svc.maven-minimal-version>
     <svc.semverparser.version>1.0.0</svc.semverparser.version>
     <svc.commons-lang3.version>3.20.0</svc.commons-lang3.version>
@@ -89,6 +89,12 @@
   </dependencyManagement>
 
   <profiles>
+    <profile>
+      <id>no-native-build</id>
+      <properties>
+        <svc.native-build.skip>true</svc.native-build.skip>
+      </properties>
+    </profile>
     <profile>
       <id>no-pitest-execution</id>
       <properties>
@@ -167,7 +173,7 @@
             <imageName>semver-${project.version}-${os.family}.${os.arch}.bin</imageName>
             <mainClass>fhg.tooling.semver.cli.SemVer</mainClass>
             <buildArgs>--verbose</buildArgs>
-            <skip>${skipNativeBuild}</skip>
+            <skip>${svc.native-build.skip}</skip>
           </configuration>
         </plugin>
 
