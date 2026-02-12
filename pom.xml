@@ -47,7 +47,7 @@
     <svc.pitest.version>1.22.1</svc.pitest.version>
     <svn.pitest-junit.version>1.2.3</svn.pitest-junit.version>
     <svc.pitest.skip>false</svc.pitest.skip>
-    <svc.pitest-target.coverage>79</svc.pitest-target.coverage>
+    <svc.pitest-target.coverage>71</svc.pitest-target.coverage>
   </properties>
 
   <modules>
@@ -186,7 +186,7 @@
           <artifactId>pitest-maven</artifactId>
           <version>${svc.pitest.version}</version>
           <configuration>
-            <coverageThreshold>${svc.pitest-target.coverage}</coverageThreshold>
+            <mutationThreshold>${svc.pitest-target.coverage}</mutationThreshold>
             <skip>${svc.pitest.skip}</skip>
           </configuration>
           <dependencies>
