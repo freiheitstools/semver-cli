@@ -84,7 +84,7 @@ jobs:
           echo "native_filename=${NATIVE_FILENAME}" >> ${GITHUB_OUTPUT}
 
       - name: Upload native binary
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         # The native binary can be only uploaded once for a plattform, therefore we have decided
         # to upload native binary only once for a given reference plattform
         if: matrix.jdk == env.REFERENCE_JDK_VERSION
@@ -94,7 +94,7 @@ jobs:
           if-no-files-found: error
 
       - name: Upload ueberjar
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         # The Ueberjar can be only uploaded once, therefore we have decided to upload
         # the artifact only once for a given reference plattform
         if: matrix.jdk == env.REFERENCE_JDK_VERSION && matrix.os == env.REFERENCE_OS_NAME
