@@ -1,0 +1,192 @@
+# Release workflow: Builds the project, signs artifacts with GPG,
+# and creates a GitHub Release with all assets.
+#
+# Triggered by pushing a tag matching 'v*' (e.g. v1.2.3).
+#
+# Required GitHub Secrets:
+#   GPG_PRIVATE_KEY  - Base64-encoded private GPG key
+#   GPG_PASSPHRASE   - Passphrase for the GPG key
+
+name: Release
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write
+
+jobs:
+  # ---------------------------------------------------------------------------
+  # Job 1: Build – Matrix build for native binaries + uber JAR
+  # ---------------------------------------------------------------------------
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest, ubuntu-latest]
+
+    runs-on: ${{ matrix.os }}
+
+    env:
+      # Only the reference OS uploads the uber JAR (it is platform-independent)
+      REFERENCE_OS: 'macos-latest'
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd  # v6
+
+      - name: Extract version from tag
+        id: version
+        run: |
+          VERSION="${GITHUB_REF_NAME#v}"
+          echo "version=${VERSION}" >> "${GITHUB_OUTPUT}"
+          echo "Extracted version: ${VERSION}"
+
+      - name: Setup GraalVM JDK 25
+        uses: actions/setup-java@be666c2fcd27ec809703dec50e508c2fdc7f6654  # v5
+        with:
+          distribution: 'graalvm'
+          java-version: '25'
+
+      - name: Cache Maven dependencies
+        uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306  # v5
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+
+      - name: Set release version in POM files
+        run: |
+          mvn --batch-mode versions:set \
+            -DnewVersion=${{ steps.version.outputs.version }} \
+            -DprocessAllModules \
+            -DgenerateBackupPoms=false
+
+      - name: Build with Maven
+        run: |
+          mvn --batch-mode --no-transfer-progress \
+            clean verify package \
+            -DskipTests=false
+
+      - name: Determine artifact filenames
+        id: artifacts
+        run: |
+          UEBERJAR_FILENAME=$(basename $(ls client/target/mein-tool-*.jar))
+          echo "ueberjar_filename=${UEBERJAR_FILENAME}" >> "${GITHUB_OUTPUT}"
+
+          NATIVE_FILENAME=$(basename $(ls client/target/mein-tool-*.bin))
+          echo "native_filename=${NATIVE_FILENAME}" >> "${GITHUB_OUTPUT}"
+
+          echo "Uber JAR: ${UEBERJAR_FILENAME}"
+          echo "Native binary: ${NATIVE_FILENAME}"
+
+      - name: Upload native binary
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f  # v6
+        with:
+          name: ${{ steps.artifacts.outputs.native_filename }}
+          path: client/target/${{ steps.artifacts.outputs.native_filename }}
+          if-no-files-found: error
+
+      - name: Upload uber JAR
+        if: matrix.os == env.REFERENCE_OS
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f  # v6
+        with:
+          name: ${{ steps.artifacts.outputs.ueberjar_filename }}
+          path: client/target/${{ steps.artifacts.outputs.ueberjar_filename }}
+          if-no-files-found: error
+
+  # ---------------------------------------------------------------------------
+  # Job 2: Sign – GPG-sign all artifacts and generate checksums
+  # ---------------------------------------------------------------------------
+  sign:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download all build artifacts
+        uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53  # v6
+        with:
+          path: artifacts/
+          merge-multiple: true
+
+      - name: Import GPG private key
+        run: |
+          echo "${GPG_PRIVATE_KEY}" | base64 --decode | gpg --batch --import
+        env:
+          GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
+
+      - name: List downloaded artifacts
+        run: ls -lha artifacts/
+
+      - name: GPG-sign all artifacts
+        run: |
+          for file in artifacts/mein-tool-*; do
+            echo "Signing ${file}..."
+            gpg --batch --yes --pinentry-mode loopback \
+              --passphrase "${GPG_PASSPHRASE}" \
+              --detach-sign --armor \
+              "${file}"
+          done
+        env:
+          GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+
+      - name: Generate SHA-256 checksums
+        working-directory: artifacts
+        run: |
+          for file in mein-tool-*; do
+            if [[ "${file}" == *.asc ]]; then
+              continue
+            fi
+            sha256sum "${file}" > "${file}.sha256"
+          done
+
+      - name: Verify GPG signatures
+        run: |
+          for sig in artifacts/*.asc; do
+            echo "Verifying ${sig}..."
+            gpg --batch --verify "${sig}" "${sig%.asc}"
+          done
+
+      - name: Display signed artifacts
+        run: |
+          echo "=== All release artifacts ==="
+          ls -lha artifacts/
+          echo ""
+          echo "=== SHA-256 checksums ==="
+          cat artifacts/*.sha256
+
+      - name: Upload signed artifacts
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f  # v6
+        with:
+          name: signed-release-artifacts
+          path: artifacts/
+          if-no-files-found: error
+
+  # ---------------------------------------------------------------------------
+  # Job 3: Release – Create GitHub Release and upload all assets
+  # ---------------------------------------------------------------------------
+  release:
+    needs: sign
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download signed artifacts
+        uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53  # v6
+        with:
+          name: signed-release-artifacts
+          path: release-assets/
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@a06a81a03ee405af7f2048a818ed3f03bbf83c7b  # v2
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: ${{ github.ref_name }}
+          draft: false
+          prerelease: false
+          generate_release_notes: true
+          files: |
+            release-assets/*
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
