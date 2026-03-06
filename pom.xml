@@ -30,6 +30,7 @@
     <svc.semverparser.version>1.0.0</svc.semverparser.version>
     <svc.commons-lang3.version>3.17.0</svc.commons-lang3.version>
     <svc.maven-compiler-plugin.version>3.14.0</svc.maven-compiler-plugin.version>
+    <svc.maven-gpg-plugin.version>3.2.7</svc.maven-gpg-plugin.version>
     <svc.maven-surefire-plugin.version>3.5.3</svc.maven-surefire-plugin.version>
     <svc.maven-jar-plugin.version>3.4.2</svc.maven-jar-plugin.version>
     <svc.native-image-maven-plugin.version>21.2.0</svc.native-image-maven-plugin.version>
@@ -111,12 +112,51 @@
         <os.family>windows</os.family>
       </properties>
     </profile>
+
+
+
+    <profile>
+      <id>enable-gpg-signing-of-artifacts</id>
+      <build>
+        <plugins>
+          <plugin>
+            <!-- Used in the GitHub Workflow. See also the workflows please! -->
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-gpg-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>sign-artifacts</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>sign</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+
+
+
+
+
+
+    </profile>
+
+
+
   </profiles>
 
   <build>
     <defaultGoal>clean install</defaultGoal>
     <pluginManagement>
       <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-gpg-plugin</artifactId>
+          <version>${svc.maven-gpg-plugin.version}</version>
+        </plugin>
+
         <plugin>
           <artifactId>maven-surefire-plugin</artifactId>
           <version>${svc.maven-surefire-plugin.version}</version>
