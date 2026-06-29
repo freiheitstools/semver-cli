@@ -59,7 +59,7 @@ jobs:
 
       - name: Setup local cached Maven Repository
         id: setup-cached-repo
-        uses: actions/cache@v5
+        uses: actions/cache@v6
         env:
           cache-name: maven-local-repository-cache
         with:
